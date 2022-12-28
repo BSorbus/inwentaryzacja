@@ -1,0 +1,46 @@
+<div class="grid-container">
+
+  <div class="sidebar">
+    <%= render 'sidebar_index' %>
+  </div>
+
+  <div class="main-content">
+    <div class="container-fluid">
+
+      <div class="row">
+        <div class="col-sm-12">
+          <h3 class="center colored-title index-title"><%= archive_index_legend %></h3>
+        </div> <!--/col-sm-12 -->
+      </div> <!--/row -->
+
+      <div class="row">
+        <div class="col-sm-12">
+          <table id="archives-table" class="hover cell-border" cellspacing="0" width="100%" 
+            data-source="<%= datatables_index_archives_path(format: :json) %>"
+            data-locale_url="<%= datatables_lang_path(format: :json) %>"
+            data-index_in_role="<%= index_in_role %>">
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th><%= Archive.human_attribute_name(:name) %></th>
+                <th><%= Archive.human_attribute_name(:note) %></th>
+                <th><%= Archive.human_attribute_name(:expiry_on) %></th>
+                <th><%= Archive.human_attribute_name(:folders_count) %></th>
+                <th><%= Archive.human_attribute_name(:files_count) %></th>
+                <th class="col-sm-2"><%= Archive.human_attribute_name(:files_size_sum) %></th>
+            <!--<th><%#= Archive.human_attribute_name(:author) %></th> -->
+              </tr>
+            </thead>
+
+            <tbody>
+               <!--data from JSON -->
+            </tbody>
+          </table>
+        </div> <!--/col-sm-12 -->
+      </div> <!--/row -->
+
+    </div> <!--/container-fluid--> 
+  </div> <!--/main-content--> 
+
+</div> <!--/grid-containe--> 
+

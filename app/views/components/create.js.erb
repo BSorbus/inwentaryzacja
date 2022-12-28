@@ -1,0 +1,8 @@
+<% if @component.new_record? %>
+  // alert("Error: <%= j @component.errors.full_messages.join(', ').html_safe %>");
+  toastr['error']("<%= @component.errors.full_messages.join(', ').html_safe %>", 'Error', {timeOut: 15000});
+<% else %>
+  $('#componentable-components').DataTable().draw();
+	toastr['success']("<%= @message %>");
+  // toastr['success']("<%= @component.component_file.file.filename %>" + '<br>...pobieranie zakończone');
+<% end %>

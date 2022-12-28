@@ -1,0 +1,12 @@
+<% if @status == "forbidden" %>
+  toastr['error']('[403] - Dostęp zabroniony', 'Error', {timeOut: 15000});
+<% else %>
+  $('#component_name_if_folder').val('');
+  <% if @component.new_record? %>
+    toastr['error']("<%= @component.errors.full_messages.join(', ').html_safe %>", 'Error', {timeOut: 15000});
+  <% else %>
+    $('#componentable-components').DataTable().draw();
+		toastr['success']("<%= @message %>");
+    // toastr['success']("<%= @component.name_if_folder %>" + '<br>...został utworzony');
+  <% end %>
+<% end %>

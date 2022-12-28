@@ -1,0 +1,108 @@
+<div id="tab_components">
+  <fieldset class="my-fieldset">
+    <legend class="my-fieldset colored-title"><%= subtitle %>&nbsp;&nbsp;-&nbsp;&nbsp;<%= component_index_legend %></legend>
+
+    <div class="row">
+      <div id="id_component_breadcrumb" class="col-sm-8"></div>
+
+      <div class="col-sm-4">
+        <%= form_for [componentable, Component.new], url: polymorphic_url([componentable, Component.new], action: "create_folder"), remote: true, html: { id: "new_component_folder", class: "form form-inline" } do |ff| %>
+          <div class="row pull-right">
+            <div class="form-group col-sm-12">
+              <%#= ff.label :name_if_folder, class: 'control-label' %>
+              <%= ff.text_field :name_if_folder, class: 'form-control input-sm' %>
+
+              <%= ff.hidden_field :parent_id, id: "component_parent_id_for_folder", value: nil %>
+              <%#= f.submit nil, :class => 'btn btn-sm btn-success' %>
+
+              <%= ff.button(:class => "btn btn-sm btn-success", disabled: false, :id => "for_folder_subbimt_btn_submit") do %>
+                <span><%= fa_icon("folder-plus", text: t("components.components_tab.folder_submit")) %></span>
+              <% end %>
+
+            </div>
+          </div>
+        <% end %>
+      </div>
+
+      <div class="col-sm-12">
+        <table id="componentable-components" class="hover cell-border compact" width="100%" 
+          data-source="<%= datatables_index_components_path(componentable_type: componentable.class.to_s, componentable_id: componentable.id.to_s, format: :json) %>"
+          data-locale="<%= locale %>"
+          data-locale_url="<%= datatables_lang_path(format: :json) %>">
+          <thead>
+            <tr>
+              <th> </th>
+              <th> ID </th>
+              <th> NAME_IF_FOLDER </th>
+              <th><%= Component.human_attribute_name(:name) %></th>
+              <th><%= Component.human_attribute_name(:note) %></th>
+              <th><%= Component.human_attribute_name(:author_id) %></th>
+              <th><%= Component.human_attribute_name(:updated_at) %></th>
+              <th><%= Component.human_attribute_name(:file_size_or_badge) %></th>
+              <th> Akcja </th>
+            </tr>
+          </thead>
+          <tbody>                    
+            <!--data from JSON -->
+          </tbody>
+        </table>
+      </div> <!--/col-sm-12 -->
+
+
+      <div class="col-sm-12">
+        <hr class="hr-with-minimum-margins">
+        <%= form_for [componentable, Component.new] do |f| %>
+          <div class="row">
+            <div class="form-group col-sm-12">
+              <%= f.label :component_file, class: 'control-label' %><small>&nbsp;&nbsp;(<%= t('help_block_text.fileuploaddragdrop') %>)</small><br>
+              <%= f.file_field :component_file, multiple: true, name: "component[component_file]", class: 'form-control input input-file-field' %>
+            </div>
+          </div>
+          <%= f.hidden_field :parent_id, id: "component_parent_id", value: nil %>
+        <% end %>
+      </div> <!-- /col-sm-12 -->
+
+      <div class="col-sm-12">
+        <script id="component-template-upload" type="text/x-tmpl">
+
+          <div class="upload" id="{%=o.name%}_id_file">
+            <div>{%=o.name%}</div> 
+            <div class="progress">
+              <div class="progress-bar progress-bar-success" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%;"></div>
+            </div>
+          </div>
+
+        </script>
+      </div> <!-- /col-sm-12 -->
+
+
+    </div>
+
+  </fieldset>
+</div>
+
+<script type="text/javascript">
+
+  function linkToComponentBreadcrumb(breadcrumb_ancestry_json={parent_id: null, ancestry_path: [], ancestor_ids: []}){
+    // Store the latest `component_breadcrumb_path` object for next reload
+    localStorage.setItem( 'cloud_component_breadcrumb', JSON.stringify(breadcrumb_ancestry_json) );
+    // redraw for new ajax data: d.component_parent_id 
+    $('#componentable-components').DataTable().draw();
+    buildDirectoryBreadcrumb("id_component_breadcrumb", 
+                              ["component_parent_id_for_folder","component_parent_id"],
+                              "linkToComponentBreadcrumb", 
+                              breadcrumb_ancestry_json);
+
+  };    
+
+  $(document).ready(function() {
+
+    localStorage.removeItem('cloud_component_breadcrumb');
+    buildDirectoryBreadcrumb("id_component_breadcrumb", 
+                              ["component_parent_id_for_folder","component_parent_id"],
+                              "linkToComponentBreadcrumb", 
+                              breadcrumb_ancestry_json={parent_id: null, ancestry_path: [], ancestor_ids: []});
+
+  });
+
+</script>

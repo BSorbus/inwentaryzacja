@@ -1,0 +1,27 @@
+<div id="tab_groups">
+  <fieldset class="my-fieldset">
+    <legend class="my-fieldset colored-title"><%= subtitle %>&nbsp;&nbsp;-&nbsp;&nbsp;<%= group_index_legend %></legend>
+
+    <div class="row">
+      <div class="col-sm-12">
+        <table id="user-groups-table" class="hover cell-border compact" width="100%" 
+          data-source="<%= datatables_index_user_groups_path(user_id: @user.id, format: :json) %>"
+          data-locale_url="<%= datatables_lang_path(format: :json) %>">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th><%= Group.human_attribute_name(:name) %></th>
+              <th><%= Group.human_attribute_name(:note) %></th>
+              <th><%= t('table_group_member') %></th>
+              <th><%= t('table_action') %></th>
+            </tr>
+          </thead>
+          <tbody>
+             <!--data from JSON -->
+          </tbody>
+        </table>
+      </div> <!--/col-sm-12 -->
+    </div> <!--/row -->
+
+  </fieldset>
+</div>

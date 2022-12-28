@@ -1,0 +1,93 @@
+<div id="tab_data">
+  <fieldset class="my-fieldset">
+    <legend class="my-fieldset colored-title"><%= subtitle %></legend>
+    <div class="row">
+
+      <div class="col-sm-12">
+        <% input_disabled ||= false  
+           #if input_disabled is not passed to the partial it doesn't crash. 
+           # We default it to false 
+        %>
+
+        <%= form_errors_for @role %>
+
+        <div class="row">
+          <div class="col-sm-6">
+            <div class="row">
+
+              <div class="form-group col-sm-12">
+                <p><strong><%= Role.human_attribute_name(:name) %></strong></p>
+                <%= @role.name %>
+              </div>
+
+            </div>  <!-- /row -->
+          </div>  <!-- /col-sm-6 -->
+
+          <div class="col-sm-6">
+            <div class="row">
+              <div class="form-group col-sm-12">
+<!-- 
+                <p><strong><%= Role.human_attribute_name(:note) %></strong></p>
+                <%= @role.note.html_safe %>
+ -->
+                <% if @role.note.html_safe.size > 0 %>
+                  <blockquote>
+                    <%= @role.note.html_safe %>
+                  </blockquote>
+                <% end %>
+              </div>
+            </div>
+          </div> <!--/col-sm-6 -->
+        </div>  <!-- /row -->
+
+        <div class="row">
+          <div class="col-sm-12">
+            <div class="row">
+
+              <div class="form-group col-sm-12">
+                <p><strong><%= Role.human_attribute_name(:activities) %></strong></p>
+                <%= @role.activities %>
+              </div>
+
+            </div> <!-- /row -->
+          </div> <!--/col-sm-12 -->
+        </div>  <!-- /row -->
+
+        <hr class="hr-without-top-margin">
+
+        <div class="row">
+          <div class="col-sm-12">
+<!-- 
+            <%#= link_to roles_path, class: "btn btn-default" do %>
+              <span class="fa fa-list"></span>
+              <%#= t("helpers.links.index") %>
+            <%# end %>
+ -->
+            <% if policy(@role).destroy? %>
+              <%= link_to role_path(@role),
+                                  method: :delete,
+                                  data: { confirm: t('helpers.links.confirm_destroy', data: @role.name) }, 
+                                  class: "btn btn-danger" do %>
+                <span class="fa fa-trash"></span>
+                <%= t("helpers.links.destroy") %>
+              <% end %>
+            <% end %>
+
+            <% if policy(@role).edit? %>
+              <%= link_to edit_role_path(@role), class: "btn btn-primary" do %>
+                <span class="fa fa-edit"></span>
+                <%= t("helpers.links.edit") %>
+              <% end %>
+            <% end %>
+
+            <h6 class="pull-right"><%= last_updated_legend(@role) %></h6>
+
+          </div> <!--/col-sm-12 -->
+        </div> <!-- /row -->
+
+
+      </div> <!--/col-sm-12-->  
+
+    </div>
+  </fieldset>
+</div>

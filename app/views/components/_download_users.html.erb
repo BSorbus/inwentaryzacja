@@ -1,0 +1,48 @@
+<div class="row">
+  <div class="col-sm-12">
+
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th><%= User.human_attribute_name(:email) %></th>
+          <th><%= User.human_attribute_name(:first_name) %></th>
+          <th><%= User.human_attribute_name(:last_name) %></th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @component.componentable.accesses_users.order(:email).uniq.each do |rec| %>
+          <tr>
+            <td class="col-sm-5"><%= rec.email %></td>
+            <td class="col-sm-3"><%= rec.first_name %></td>
+            <td class="col-sm-3"><%= rec.last_name %></td>
+            <td class="col-sm-1">
+
+              <% if access %>
+                <%= link_to send_link_to_component_download_component_path(@component.id, users_ids: [rec.id] ),
+                                    method: :post,
+                                    remote: true,
+                                    data: { confirm: t('helpers.links.confirm_send_mail_for_download', data: rec.fullname) }, 
+                                    class: "btn btn-xs btn-info" do %>
+                  <span><%= send_email_with_share_legend %></span>
+                <% end %>
+              <% end %>
+
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+
+    <% if access %>
+      <%= link_to send_link_to_component_download_component_path(@component.id, users_ids: @component.componentable.accesses_users.ids.uniq ),
+                          method: :post,
+                          remote: true,
+                          data: { confirm: t('helpers.links.confirm_send_mail_for_download', data: t('to_all')) }, 
+                          class: "pull-left btn btn-sm btn-info" do %>
+        <span><%= send_email_with_share_to_all_legend %></span>
+      <% end %>
+    <% end %>
+
+  </div>
+</div>

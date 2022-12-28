@@ -1,0 +1,24 @@
+<div class="grid-container">
+
+  <div class="sidebar">
+    <%= render 'sidebar_new' %>
+  </div>
+
+  <div class="main-content">
+    <br>
+    <div class="container-fluid"> 
+      <div class="row">
+        <div class="col-sm-12">
+          <fieldset class="my-fieldset">
+            <legend class="my-fieldset colored-title"><%= archive_new_legend(@archive) %></legend>
+            <%= render 'form', archive: @archive %>
+          </fieldset>
+        </div>
+
+      </div>
+
+    </div> <!--/container-fluid--> 
+  </div> <!--/main-content--> 
+
+</div> <!--/grid-containe--> 
+

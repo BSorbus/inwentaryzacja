@@ -1,0 +1,96 @@
+<div class="modal-header">
+  <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+  <h4 id="myModalLabel"><strong><%= group_info_legend(@group) %></strong></h4>
+</div>
+<div class="modal-body">
+
+  <div class="row">
+
+    <div class="col-sm-12">
+<!--       <%= @group.note.html_safe %>
+ -->
+      <% if @group.note.html_safe.size > 0 %>
+        <blockquote>
+          <%= @group.note.html_safe %>
+        </blockquote>
+      <% end %>
+    </div> <!--/col-sm-6 -->
+
+    <div class="form-group col-sm-12">
+
+<!-- 
+class="<%#= @license.status == 'S' ? 'text-danger' : 'text-success' %>"
+
+ -->      
+      <% unless @for_archive.present? %>
+        <% access_to_send_link = false %>
+      <% else %>
+        <% access_to_send_link = policy(@for_archive).send_link_to_archive_show? %>
+      <% end %>
+
+      <table class="table table-hover">
+        <thead>
+          <tr>
+            <th><%= User.human_attribute_name(:email) %></th>
+            <th><%= User.human_attribute_name(:first_name) %></th>
+            <th><%= User.human_attribute_name(:last_name) %></th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @group.users.order(:email).each do |rec| %>
+            <tr>
+              <td class="col-sm-5"><%= rec.email %></td>
+              <td class="col-sm-3"><%= rec.first_name %></td>
+              <td class="col-sm-3"><%= rec.last_name %></td>
+              <td class="col-sm-1">
+
+                  <% if access_to_send_link %>
+                    <%= link_to send_link_to_archive_show_archive_path(@for_archive.id, users_ids: [rec.id] ),
+                                        method: :post,
+                                        remote: true,
+                                        data: { confirm: t('helpers.links.confirm_send_mail_for_archive', data: rec.fullname) }, 
+                                        class: "btn btn-xs btn-info" do %>
+                      <span><%= send_email_with_share_legend %></span>
+                    <% end %>
+                  <% end %>
+
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+
+    </div>
+
+    <div class="col-sm-12">
+      <h6 class="pull-right"><%= last_updated_legend(@group) %></h6>
+    </div> <!--/col-sm-6 -->
+
+  </div>  <!-- /row -->
+
+
+</div>
+<div class="modal-footer">
+
+  <% if @for_archive.present? %>
+    <% if policy(@for_archive).send_link_to_archive_show? %>
+      <%= link_to send_link_to_archive_show_archive_path(@for_archive.id, users_ids: @group.users.ids ),
+                          method: :post,
+                          remote: true,
+                          data: { confirm: t('helpers.links.confirm_send_mail_for_archive', data: t('to_all')) }, 
+                          class: "pull-left btn btn-info" do %>
+        <span><%= send_email_with_share_to_all_legend %></span>
+      <% end %>
+    <% end %>
+  <% end %>
+
+  <% if policy(@group).edit? %>
+    <%= link_to edit_group_path(@group), remote: true, class: "pull-left btn btn-primary" do %>
+      <span class="fa fa-edit"></span>
+      <%= t("helpers.links.edit") %>
+    <% end %>
+  <% end %>
+
+  <button class="btn btn-primary" data-dismiss="modal" aria-hidden="true"><%= t('helpers.links.close') %></button>
+</div>

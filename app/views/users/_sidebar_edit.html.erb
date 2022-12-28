@@ -1,0 +1,54 @@
+<button class="sideber-button fa fa-chevron-right" onclick="changeSidebar(this)" title="<%=t('sidebar')%>" rel='tooltip'></button>
+
+<div class="sidebar-content-small container-fluid">
+  <div class="center"><%= user_icon_legend %></div>
+  <hr>
+
+  <div class="row">
+    <div class="col-sm-12">
+
+      <ul class="nav nav-pills brand-pills nav-stacked" role="tablist">
+
+        <li role="presentation" class="brand-nav"><%= link_to users_path, title: t('.index'), rel: 'tooltip' do %>
+          <span class="fa fa-list"></span>
+          <% end %>
+        </li>
+
+      </ul>
+
+    </div>
+  </div>
+
+</div>    
+
+
+<div class="sidebar-content-large hidden container-fluid">
+  <div class="center"><%= user_legend %></div>
+  <hr>
+  <div class="row">
+    <div class="col-sm-12">
+
+
+      <ul class="nav nav-pills brand-pills nav-stacked" role="tablist">
+ 
+        <li role="presentation" class="brand-nav"><%= link_to users_path, title: t('.index'), rel: 'tooltip' do %>
+            <%= back_to_index_legend %>
+          <% end %>
+        </li>
+
+      </ul>
+
+
+    </div>
+  </div>
+
+  <hr>
+  <div class="row">
+    <div class="col-sm-12">
+      <div class="center"><%= fa_icon("edit", size: '2x') %></div>
+      <h3 class="center"><%= t('helpers.links.edit') %></h3>
+    </div>
+  </div>
+
+
+</div>

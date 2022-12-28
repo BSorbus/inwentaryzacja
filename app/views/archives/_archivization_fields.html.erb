@@ -1,0 +1,201 @@
+<div class="fields">
+  <div class='row' >
+    <div class="form-group required col-sm-5">
+      <%= f.hidden_field :group_id, 
+                        class: "form-control input-sm select2group", 
+                        placeholder: t('placeholder.select2group'),
+                        style: "width:100%",
+                        "data-locale": "#{params[:locale]}" %>
+    </div>
+
+    <div class="form-group required col-sm-5">
+      <%= f.select :archivization_type_id, 
+            ArchivizationType.for_user_more_privilage( policy(:archive).more_privilage_in_role? ).order(:id).collect {|v| [ "#{v[:name]}", v[:id] ] },
+            { include_blank: true }, 
+            { autofocus: false, class: 'form-control input-sm', disabled: false } %>
+
+    </div>
+
+    <div class="form-group col-sm-2">
+      <%= f.hidden_field :_destroy %>
+      <%= link_to t("helpers.links.link_to_remove_fields_nested_small"), '#',
+        onClick: "removeNestedFields(this); return false;", class: 'remove-link-button btn btn-sm btn-danger', title: t('tooltip.remove_fields_nested'), rel: 'tooltip' %>
+    </div>
+  </div>
+</div>
+
+
+<script>
+
+  function groupAddJsActionExternal(that) {
+    // console.log('groupAddJsActionExternal -> that', that);
+    var select2ObjContextId = $(that).attr('data-select2-context-id');
+    //remove spaces
+    var nameForAdd = $(that).attr('data-term');
+    $.ajax({
+      url: "/<%= locale %>/groups/new.js",
+      type: "GET",
+      data: {
+        group: {"name": nameForAdd}
+      },
+      success: function (response) {
+        $("#"+select2ObjContextId).select2('close');
+      },
+      error: function (jqXHR, exception) {
+        console.log(jqXHR);
+        if (jqXHR.status == 401) {
+          window.location.reload();
+        } else {
+          getErrorMessage(jqXHR, exception);
+        }
+      }
+    });
+  };
+
+
+  function initGroupSelection(element, callback) {
+    var id=$(element).val();
+    if (id!=="") {
+      $.get( "/<%= locale %>/groups/"+id+".json", function(data_from_json) {
+        if(data_from_json)
+          // callback({ id: data_from_json.id, text: data_from_json.fullname });
+        return callback({ data_obj: data_from_json, id: data_from_json.id });
+      });
+    }
+  };
+
+    // function formatGroupSelection(item) {
+    //   if (item.id) {
+    //     var groupName = item.data_obj.fullname;
+    //     return  "<span>" + groupName + "</span>";
+    //   } else {
+    //     return "";
+    //   }
+    // };
+
+  function formatGroupSelection(item, container) {
+    container.append($('<span class="selected-item"></span>').text(item.data_obj.fullname));
+    $("<span class='pull-right'><a><button type='button' class='btn btn-xs btn-default'><%= t('helpers.links.show_link') %></button></a></span>")
+      .appendTo(container)
+      .mousedown(function(e) {
+        e.stopPropagation();            
+      })
+      .click(function(e) {
+        e.preventDefault();
+
+        $.ajax({
+          // url: "/<%= locale %>/groups/" + item.id + "/edit.js",
+          url: "/<%= locale %>/groups/" + item.id + ".js",
+          type: "GET",
+          success: function (response) {
+            //select2groupObj.select2('close');
+            // mogla zmienic sie nazwa grupy, wiec byc moze warto odswiezyc row?
+          },
+          error: function (jqXHR, exception) {
+            console.log(jqXHR);
+            if (jqXHR.status == 401) {
+              window.location.reload();
+            } else {
+              getErrorMessage(jqXHR, exception);
+            }
+          }
+        });
+
+      });
+  };
+
+  function formatGroupResult(item, container, query, escapeMarkup) {
+    var select2ObjContextId = this.element.context.id;
+    if (item.id) {    
+      var $option = $("<span></span>");
+
+      var $preview = $("<span class='pull-right'><a><button type='button' class='btn btn-xs btn-default'><%= t('helpers.links.show_link') %></button></a></span>");
+      $preview.prop("href", "#");
+      $preview.on('mouseup', function (evt) {
+        // Select2 will remove the dropdown on `mouseup`, which will prevent any `click` events from being triggered
+        // So we need to block the propagation of the `mouseup` event
+        evt.stopPropagation();
+      });
+    
+      $preview.on('click', function (evt) {
+ 
+        $.ajax({
+          // url: "/<%= locale %>/groups/" + item.id + "/edit.js",
+          url: "/<%= locale %>/groups/" + item.id + ".js",
+          type: "GET",
+          success: function (response) {
+            $("#"+select2ObjContextId).select2('close');
+          },
+          error: function (jqXHR, exception) {
+            console.log(jqXHR);
+            if (jqXHR.status == 401) {
+              window.location.reload();
+            } else {
+              getErrorMessage(jqXHR, exception);
+            }
+          }
+        });
+
+      });
+      
+      $option.text( item.data_obj.fullname );
+      $option.append($preview);
+      
+      return $option;
+    } else {
+      return "";
+    }
+  };
+
+  $('.select2group').select2({
+    minimumInputLength: 0,
+    allowClear: false,
+    ajax: {
+      url: "/<%= locale %>/groups/select2_index.json",
+      dataType: 'json',
+      quietMillis: 250,
+      type: 'GET',
+      data: function(term, page) {
+        return {
+          q: term,
+          page_limit: 10,
+          page: page
+        };
+      },
+      results: function(data, page) {
+        //var more = (page * 10) < data.total_count;
+        var more = (page * 10) < data.meta.total_count;
+        var groups = $.map(data.groups, function(group, i) {
+          // return { id: group.id, text: group.fullname };
+          return { data_obj: group, id: group.id };
+        });
+        return { results: groups, more: more };
+      }
+    },
+    formatAjaxError: function(jqXHR, textStatus, errorThrown) {
+      console.log(jqXHR);
+      if (jqXHR.status == 401) {
+        window.location.reload();
+      } else {
+        getErrorMessage(jqXHR, jqXHR.status);
+      }
+      return errorThrown + " " + jqXHR.responseText;
+    },
+    formatNoMatches: function(term) {
+      // console.log("formatNoMatches -> this", this);
+      // console.log("formatNoMatches -> this.context.id", this.context.id);
+      var select2ObjContextId = this.context.id;
+
+      return "<%= t('help_block_text.select2_no_results') %><span class='pull-right'><a href='#' onclick='return groupAddJsActionExternal(this, document.activeElement.id );' data-term='" + term + "' data-select2-context-id='" + select2ObjContextId + "'><button type='button' class='btn btn-xs btn-primary'><%= t('helpers.links.want_create') %></button></a></span>";
+
+    },
+    initSelection: initGroupSelection, 
+    formatSelection: formatGroupSelection, // format selected row
+    formatResult: formatGroupResult, // format rows on list
+    dropdownCssClass: "bigdrop", // apply css that makes the dropdown taller
+    escapeMarkup: function (m) { return m; } // we do not want to escape markup since we are displaying html in results
+  });
+
+</script>
+
+

@@ -1,0 +1,57 @@
+<button class="sideber-button fa fa-chevron-right" onclick="changeSidebar(this)" title="<%=t('sidebar')%>" rel='tooltip'></button>
+
+<div class="sidebar-content-small container-fluid">
+  <div class="center"><%= group_icon_legend %></div>
+  <hr>
+   
+  <div class="row">
+    <div class="col-sm-12">
+
+      <ul class="nav nav-pills brand-pills nav-stacked" role="tablist">
+
+        <% if policy(:group).new? %>
+          <li role="presentation" class="brand-nav"><%= link_to new_group_path, title: t('.new'), rel: 'tooltip' do %>
+              <span class="fa fa-plus"></span>
+            <% end %>
+          </li>
+        <% end %>
+
+      </ul>
+
+    </div>
+  </div>
+
+</div>    
+
+
+<div class="sidebar-content-large hidden container-fluid">
+  <div class="center"><%= group_index_legend %></div>
+  <hr>
+  <div class="row">
+    <div class="col-sm-12">
+
+      <% if policy(:group).new? %>
+        <ul class="nav nav-pills brand-pills nav-stacked" role="tablist">
+   
+          <li role="presentation" class="brand-nav"><%= link_to new_group_path, title: t('.new'), rel: 'tooltip' do %>
+            <span class="fa fa-plus"></span>
+            <%= t('helpers.links.new') %>
+            <% end %>
+          </li>
+
+        </ul>
+
+      <% end %>
+
+    </div>
+  </div>
+
+  <hr>
+  <div class="row">
+    <div class="col-sm-12">
+      <div class="center"><%= fa_icon("list", size: '2x') %></div>
+      <h3 class="center"><%= t('helpers.links.index') %></h3>
+    </div>
+  </div>
+
+</div>

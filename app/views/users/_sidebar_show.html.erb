@@ -1,0 +1,110 @@
+<button class="sideber-button fa fa-chevron-right" onclick="changeSidebar(this)" title="<%=t('sidebar')%>" rel='tooltip'></button>
+
+<div class="sidebar-content-small container-fluid">
+  <div class="center"><%= user_icon_legend %></div>
+  <hr>
+
+  <div class="row">
+    <div class="col-sm-12">
+
+      <ul class="nav nav-pills brand-pills nav-stacked" role="tablist">
+
+        <li role="presentation" class="brand-nav active" title="<%= t('helpers.links.show') %>" rel='tooltip'>
+          <a href="#user_show" aria-controls="user_show" role="tab" data-toggle="tab"><%= user_icon_legend %></a>
+        </li>
+
+        <% if policy(:role).index? %>
+          <li role="presentation" class="brand-nav" title="<%= t('roles.index.title') %>" rel='tooltip'>
+            <a href="#roles" aria-controls="roles" role="tab" data-toggle="tab"><%= role_icon_legend %></a>
+          </li>
+        <% end %>
+
+        <% if policy(:group).index? %>
+          <li role="presentation" class="brand-nav" title="<%= t('groups.index.title') %>" rel='tooltip'>
+            <a href="#groups" aria-controls="groups" role="tab" data-toggle="tab"><%= group_icon_legend %></a>
+          </li>
+        <% end %>
+
+        <% if policy(:archive).index? %>
+          <li role="presentation" class="brand-nav" title="<%= t('archives.index.title') %>" rel='tooltip'>
+            <a href="#archives" aria-controls="archives" role="tab" data-toggle="tab"><%= archive_icon_legend %></a>
+          </li>
+        <% end %>
+
+        <% if policy(:user).work? %>
+          <li role="presentation" class="brand-nav" title="<%= t('works.index.title') %>" rel='tooltip'>
+            <a href="#works" aria-controls="works" role="tab" data-toggle="tab"><%= work_icon_legend %></a>
+          </li>
+        <% end %>
+ 
+        <hr>
+        <li role="presentation" class="brand-nav"><%= link_to users_path, title: t('.index'), rel: 'tooltip' do %>
+          <span class="fa fa-list"></span>
+          <% end %>
+        </li>
+
+      </ul>
+
+    </div>
+  </div>
+
+</div>    
+
+
+<div class="sidebar-content-large hidden container-fluid">
+  <div class="center"><%= user_legend %></div>
+  <hr>
+  <div class="row">
+    <div class="col-sm-12">
+
+      <ul class="nav nav-pills brand-pills nav-stacked" role="tablist">
+
+        <li role="presentation" class="brand-nav active" title="<%= t('helpers.links.show') %>" rel='tooltip'>
+          <a href="#user_show" aria-controls="user_show" role="tab" data-toggle="tab"><%= user_show_legend %></a>
+        </li>
+
+        <% if policy(:role).index? %>
+          <li role="presentation" class="brand-nav brand-nav-level-1" title="<%= t('roles.index.title') %>" rel='tooltip'>
+            <a href="#roles" aria-controls="roles" role="tab" data-toggle="tab"><%= role_index_legend %></a>
+          </li>
+        <% end %>
+
+        <% if policy(:group).index? %>
+          <li role="presentation" class="brand-nav brand-nav-level-1" title="<%= t('groups.index.title') %>" rel='tooltip'>
+            <a href="#groups" aria-controls="groups" role="tab" data-toggle="tab"><%= group_index_legend %></a>
+          </li>
+        <% end %>
+
+        <% if policy(:archive).index? %>
+          <li role="presentation" class="brand-nav brand-nav-level-1" title="<%= t('archives.index.title') %>" rel='tooltip'>
+            <a href="#archives" aria-controls="archives" role="tab" data-toggle="tab"><%= archive_index_legend %></a>
+          </li>
+        <% end %>
+
+        <% if policy(:user).work? %>
+          <li role="presentation" class="brand-nav brand-nav-level-1" title="<%= t('works.index.title') %>" rel='tooltip'>
+            <a href="#works" aria-controls="works" role="tab" data-toggle="tab"><%= work_index_legend %></a>
+          </li>
+        <% end %>
+ 
+        <hr>
+        <li role="presentation" class="brand-nav"><%= link_to users_path, title: t('.index'), rel: 'tooltip' do %>
+            <%= back_to_index_legend %>
+          <% end %>
+        </li>
+
+      </ul>
+
+    </div>
+  </div>
+
+  <hr>
+  <div class="row">
+    <div class="col-sm-12">
+      <div class="center"><%= fa_icon("eye", size: '2x') %></div>
+      <h3 class="center"><%= t('helpers.links.show') %></h3>
+    </div>
+  </div>
+
+
+</div>

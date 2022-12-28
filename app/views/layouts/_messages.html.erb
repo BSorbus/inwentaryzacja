@@ -1,0 +1,33 @@
+<% flash.each do |name, msg| %>
+  <% if msg.is_a?(String) %>
+
+    <script type="text/javascript">
+
+      toastr.options = {
+        "closeButton": false,
+        "debug": true,
+        "newestOnTop": false,
+        "progressBar": false,
+        "positionClass": "toast-top-right",
+        "preventDuplicates": false,
+        "onclick": null,
+        "showDuration": "300",
+        "hideDuration": "1000",
+        "timeOut": "5000",
+        "extendedTimeOut": "1000",
+        "showEasing": "swing",
+        "hideEasing": "linear",
+        "showMethod": "fadeIn",
+        "hideMethod": "fadeOut"
+      };
+
+      if ('<%= flash_class_name(name) %>' === 'error') {
+        toastr['<%= flash_class_name(name) %>']('<%= msg %>', 'Error', {timeOut: 15000} );
+      } else {
+        toastr['<%= flash_class_name(name) %>']('<%= msg %>');
+      }
+
+    </script>
+  <% end %>
+<% end %>
+

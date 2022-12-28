@@ -1,0 +1,39 @@
+jQuery(function() {
+  return $('#new_component').fileupload({
+    dataType: "script",
+    add: function(e, data) {
+      if ($('#tab_components').is(":visible")) {
+        data.context = $(tmpl("component-template-upload", data.files[0]));
+        $('#new_component').append(data.context);
+        $('#new_component').append("<img class='spinner' src='<%= asset_path('spinner.gif') %>'>");
+        return data.submit();
+      }
+    },
+    progress: function(e, data) {
+      var percentComplete;
+      if (data.context) {
+        percentComplete = Math.round(data.loaded / data.total * 100);
+        data.context.find('.progress-bar').css("width", percentComplete + '%').attr('aria-valuenow', percentComplete);
+        data.context.find('.progress-bar').text("<%= I18n.t('file_upload.in_progress') %> " + (percentComplete + "%"));
+        if (percentComplete === 100) {
+          return data.context.find('.progress-bar').text("<%= I18n.t('file_upload.wait_to_save') %>");
+        }
+      }
+    },
+    stop: function(e, data) {
+      $('#new_component').find('.spinner').hide();
+      return $('#end_messaage').fadeOut("slow");
+    },
+    done: function(e, data) {
+      return data.context.fadeOut("slow");
+    },
+    fail: function(e, data) {
+      if (data.jqXHR.status === 401) {
+        return window.location.reload();
+      } else {
+        getErrorMessage(data.jqXHR, data.errorThrown);
+        return data.context.fadeOut("slow");
+      }
+    }
+  });
+});

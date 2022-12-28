@@ -1,0 +1,55 @@
+function changeSidebar(obj) {
+
+  // oryginal
+  const sidebar = document.querySelector('.sidebar');
+  const mainContent = document.querySelector('.main-content');
+
+  sidebar.classList.toggle('sidebar_large');
+  mainContent.classList.toggle('main-content_small')
+
+
+  //extend
+  const sidebarContentSmall = document.querySelector('.sidebar-content-small');
+  const sidebarContentLarge = document.querySelector('.sidebar-content-large');
+
+
+  // if ( $(sidebarContentSmall).hasClass("hidden") ) {
+  //   $(sidebarContentSmall).removeClass('hidden');
+  // } else {
+  //   $(sidebarContentSmall).addClass('hidden');
+  // };
+
+
+  // if ( $(sidebarContentLarge).hasClass("hidden") ) {
+  //   $(sidebarContentLarge).show(300, function() { 
+  //     $(sidebarContentLarge).removeClass('hidden');
+  //   });
+  // } else {
+  //   $(sidebarContentLarge).addClass('hidden');
+  // };
+
+
+  if ( $(sidebarContentSmall).hasClass('hidden') ) {
+    $(obj).removeClass('fa fa-chevron-left');
+    $(obj).addClass('fa fa-chevron-right');
+
+    // $(obj).attr('title', 'zwiń');
+
+    $(sidebarContentLarge).addClass('hidden');
+    $(sidebarContentSmall).removeClass('hidden');
+  } else {
+    $(obj).removeClass('fa fa-chevron-right');
+    $(obj).addClass('fa fa-chevron-left'); 
+
+    // $(obj).attr('title', 'rozwiń');
+
+    $(sidebarContentSmall).addClass('hidden');
+    $(sidebarContentLarge).show(200, function() { 
+      $(sidebarContentLarge).removeClass('hidden');
+    });
+  };
+
+
+};
+
+

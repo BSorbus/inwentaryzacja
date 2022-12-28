@@ -1,0 +1,25 @@
+<% if user_signed_in? %>
+
+  <% archive_index_access = policy(:archive).index? || policy(:archive).index_self? %>
+
+  <% if archive_index_access %>
+
+    <li class="dropdown">
+      <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="fa fa-database"></span>&nbsp;<%= t("data") %> <span class="caret"></span></a>
+
+      <ul class="dropdown-menu">
+
+        <% if archive_index_access %>
+          <li>
+            <%= link_to archives_path do %>
+              <span><%= archive_index_legend %></span>
+            <% end %>
+          </li>
+        <% end %>
+
+      </ul>
+    </li>
+
+  <% end %>
+
+<% end %>

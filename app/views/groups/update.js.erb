@@ -1,0 +1,5 @@
+//toastr['info']("Upadate UUID");
+
+$("#myModal").find(".modal-content").html('');
+$('#myModal').modal('hide');
+toastr['success']("<%= t('activerecord.successfull.messages.updated', data: @group.fullname) %>");

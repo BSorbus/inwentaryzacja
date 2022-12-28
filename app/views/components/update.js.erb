@@ -1,0 +1,6 @@
+//toastr['info']("Upadate UUID");
+
+$("#myModal").find(".modal-content").html('');
+$('#myModal').modal('hide');
+$('#componentable-components').DataTable().draw();
+toastr['success']("<%= @message %>");

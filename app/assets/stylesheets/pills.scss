@@ -1,0 +1,48 @@
+//@import "./custom";
+
+$brand-primary:     #1B3C8F;
+$btn-default-bg:         lighten(#7D9DDF, 26.5%) !default;
+
+
+@media (min-width: 768px) {
+ 
+  .brand-pills > li > a {
+//    border-top-right-radius: 0px;
+//    border-bottom-right-radius: 0px;
+    border: 1px solid #ccc;
+  }
+
+  .nav-pills > li > a:hover {
+      background-color: $btn-default-bg;
+  }
+
+  li.brand-nav.active {
+    border-top-right-radius: 0px;
+    border-bottom-right-radius: 0px;
+  }
+
+  li.brand-nav.active a:after{
+    content: " ";
+    display: block;
+    width: 0;
+    height: 0;
+    border-top: 20px solid transparent;
+    border-bottom: 20px solid transparent;
+    border-left: 9px solid $brand-primary;
+    position: absolute;
+    top: 50%;
+    margin-top: -20px;
+    left: 100%;
+    z-index: 2;
+  }
+
+  .brand-nav-level-1 > a {
+    margin-left: 10%;
+  }
+
+  .brand-nav-level-2 > a {
+    margin-left: 20%;
+  }
+
+
+}

@@ -1,0 +1,24 @@
+<div class="grid-container">
+
+  <div class="sidebar">
+    <%= render 'sidebar_new' %>
+  </div>
+
+  <div class="main-content">
+    <br>
+    <div class="container-fluid"> 
+      <div class="row">
+        <div class="col-sm-12">
+          <fieldset class="my-fieldset">
+            <legend class="my-fieldset colored-title"><%= user_new_legend(@user) %></legend>
+            <%= render 'form', user: @user, input_disabled: true %>
+          </fieldset>
+        </div>
+
+      </div>
+
+    </div> <!--/container-fluid--> 
+  </div> <!--/main-content--> 
+
+</div> <!--/grid-containe--> 
+

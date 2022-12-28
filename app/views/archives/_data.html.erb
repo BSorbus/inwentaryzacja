@@ -1,0 +1,120 @@
+<div id="tab_data">
+  <fieldset class="my-fieldset">
+    <legend class="my-fieldset colored-title"><%= subtitle %></legend>
+    <div class="row">
+
+      <div class="col-sm-12">
+
+        <%= form_errors_for @archive %>
+
+        <div class="row">
+          <div class="col-sm-6">
+            <div class="row">
+
+              <div class="form-group col-sm-12">
+                <p><strong><%= Archive.human_attribute_name(:name) %></strong></p>
+                <%= @archive.name %>
+              </div>
+
+              <div class="form-group col-sm-5">
+                <p><strong><%= Archive.human_attribute_name(:expiry_on) %></strong></p>
+                <%= @archive.expiry_on.present? ? @archive.expiry_on.strftime("%Y-%m-%d") : '' %>
+              </div>
+
+              <div class="form-group col-sm-7">
+                <p><strong><%= Archive.human_attribute_name(:quota) %></strong></p>
+                <%= archive_human_size(@archive.quota) %>
+<!--            <%#= number_to_human_size(@archive.quota) %> -->
+              </div>
+
+            </div>  <!-- /row -->
+          </div>  <!-- /col-sm-6 -->
+
+          <div class="col-sm-6">
+            <div class="row">
+
+              <div class="form-group col-sm-12">
+                <% if @archive.note.html_safe.size > 0 %>
+                  <blockquote>
+                    <%= @archive.note.html_safe %>
+                  </blockquote>
+                <% end %>
+              </div>
+
+            </div>  <!-- /row -->
+          </div>  <!-- /col-sm-6 -->
+        </div>  <!-- /row -->
+
+        <div class="row">
+          <div class="col-sm-12">
+
+            <fieldset class="my-fieldset-short">
+              <legend class="my-fieldset"><%= t('archives.fieldset.archivizations_title') %></legend>
+
+              <table class="table table-hover">
+
+                <thead>
+                  <tr>
+                    <th><%= Archivization.human_attribute_name(:group) %></th>
+                    <th><%= Archivization.human_attribute_name(:archivization_type) %></th>
+                    <th></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <% @archive.archivizations.includes(:group).order('groups.name').each do |archivization| %>
+                    <tr>
+                      <td class="col-sm-5">
+                        <%= link_to( archivization.group.fullname, group_path(archivization.group.id, archive_id: @archive.id), remote: true ) %>
+                      </td>
+                      <td class="col-sm-5"><%= archivization.archivization_type.try(:name) %></td>
+                      <td class="col-sm-2"></td>
+                    </tr>
+                  <% end %>
+                </tbody>
+              </table>
+
+            </fieldset>
+
+          </div>
+        </div>  <!-- /row -->
+
+
+        <hr class="hr-without-top-margin">
+
+        <div class="row">
+          <div class="col-sm-12">
+<!-- 
+            <%#= link_to archives_path, class: "btn btn-default" do %>
+              <span class="fa fa-list"></span>
+              <%#= t("helpers.links.index") %>
+            <%# end %>
+-->
+
+            <% if policy(@archive).destroy? %>
+              <%= link_to archive_path(@archive),
+                                  method: :delete,
+                                  data: { confirm: t('helpers.links.confirm_destroy', data: @archive.name) }, 
+                                  class: "btn btn-danger" do %>
+                <span class="fa fa-trash"></span>
+                <%= t("helpers.links.destroy") %>
+              <% end %>
+            <% end %>
+
+            <% if policy(@archive).edit? %>
+              <%= link_to edit_archive_path(@archive), class: "btn btn-primary" do %>
+                <span class="fa fa-edit"></span>
+                <%= t("helpers.links.edit") %>
+              <% end %>
+            <% end %>
+
+            <h6 class="pull-right"><%= last_updated_legend(@archive) %></h6>
+
+          </div> <!--/col-sm-12 -->
+        </div> <!-- /row -->
+
+      </div> <!--/col-sm-12-->  
+
+    </div>
+  </fieldset>
+
+</div>

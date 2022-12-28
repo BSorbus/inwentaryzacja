@@ -1,0 +1,4 @@
+// toastr['info']("Destroy UUID ERROR");
+toastr['error']("<%= @component.errors.full_messages.join(', ').html_safe %>", 'Error', {timeOut: 15000});
+toastr['error']("<%= @message %>", 'Error', {timeOut: 15000});
+

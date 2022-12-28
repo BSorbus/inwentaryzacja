@@ -1,0 +1,57 @@
+.grid-container {
+  width: 98vw;
+  margin: 0 auto;
+//  height: 90vh;
+  display: flex;
+  transition: 0.3s ease;
+}
+
+.sidebar {
+  width: 4vw;
+  min-width: 5.25em;
+//  min-width: 65px;
+//  min-width: 7.5rem;
+//  height: 100%;
+  padding-top: 17px;
+  padding-bottom: 20px;
+  background-color: inherit;
+//  background-color: lighten(#BECC25, 42.5%);
+  transition: 0.3s ease;
+  position: relative;
+
+// BUM!
+//    position: fixed; /* Fixed/sticky position */
+//    bottom: 20px; /* Place the button at the bottom of the page */
+//    right: 30px; /* Place the button 30px from the right */
+//    z-index: 99; /* Make sure it does not overlap */
+//    outline: none; /* Remove outline */
+
+}
+
+.main-content {
+  width: 96vw;
+  height: 100%;
+  transition: 0.3s ease;
+}
+
+.main-content_small {
+  width: 80%;
+}
+.sidebar_large {
+  width: 20%;
+}
+
+.sideber-button {
+  position: absolute;
+  border: none;
+  height: 35px;
+  width: 35px;
+  border-radius: 50%;
+  box-shadow: 0px 1px 4px 1px #ccc;
+  left: 100%;
+  top: 5px;
+  transform: translateX(-60%);
+  cursor: pointer;
+//  background-color: inherit;
+  background-color: rgb(199, 213, 64);
+}

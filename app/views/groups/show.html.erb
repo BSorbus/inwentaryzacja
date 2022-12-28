@@ -1,0 +1,39 @@
+<div class="grid-container">
+
+  <div class="sidebar">
+    <%= render 'sidebar_show' %>
+  </div>
+
+  <div class="main-content">
+    <br>
+    <div class="container-fluid"> 
+      <div class="row">
+
+        <div class="col-sm-12">
+          <div class="tab-content clearfix">
+
+            <div role="tabpanel" class="tab-pane active" id="group_show">
+              <%= render 'data', input_disabled: true, subtitle: group_info_legend(@group) %>
+            </div>
+
+            <div role="tabpanel" class="tab-pane" id="users">
+              <%= render 'users', subtitle: group_info_legend(@group) %>
+            </div>
+
+            <div role="tabpanel" class="tab-pane" id="archives">
+              <%= render 'archives', subtitle: group_info_legend(@group) %>
+            </div>
+
+            <div role="tabpanel" class="tab-pane" id="works">
+              <%= render 'works/works_tab', trackable_type: "Group", trackable_id: @group.id, subtitle: group_info_legend(@group) %>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+
+    </div> <!--/container-fluid--> 
+  </div> <!--/main-content--> 
+
+</div> <!--/grid-containe--> 

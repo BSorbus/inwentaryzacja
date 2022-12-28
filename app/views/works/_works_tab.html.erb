@@ -1,0 +1,31 @@
+<div id="tab_works">
+  <fieldset class="my-fieldset">
+    <legend class="my-fieldset colored-title"><%= subtitle %>&nbsp;&nbsp;-&nbsp;&nbsp;<%=  work_index_legend %></legend>
+
+    <div class="row">
+      <div class="col-sm-12">
+        <table id="trackable-works" class="hover cell-border compact" width="100%" 
+          data-source="<%= datatables_index_trackable_works_path(trackable_id: trackable_id, trackable_type: trackable_type, format: :json) %>"
+          data-locale_url="<%= datatables_lang_path(format: :json) %>">         
+          <thead>
+            <tr>
+              <th>0 ID </th>
+              <th class="col-sm-1"><%= Work.human_attribute_name(:created_at) %></th>
+              <th class="col-sm-1"><%= Work.human_attribute_name(:created_by) %></th>
+              <th class="col-sm-1"><%= Work.human_attribute_name(:action) %></th>
+              <th class="col-sm-1"><%= Work.human_attribute_name(:trackable_type) %></th>
+              <th class="col-sm-3"><%= Work.human_attribute_name(:trackable_id) %></th>
+              <th class="col-sm-5"><%= Work.human_attribute_name(:parameters) %></th>
+            </tr>
+          </thead>
+
+          <tbody>                    
+            <!--data from JSON -->
+          </tbody>
+
+        </table>
+      </div>
+    </div>
+
+  </fieldset>
+</div>

@@ -1,0 +1,551 @@
+en:
+  "true": "True"
+  "false": "False"
+  to_all: 'all'
+  no_data: 'No data'
+  logo_file: "logo_uke_en_do_lewej.png"
+  logo_link: "http://www.uke.gov.pl/en/"
+  title: "UKE Inwentaryzacja"
+  description: "UKE Inwentaryzacja allows you to download files from the UKE storage facility"
+  layouts:
+    footer:
+      brand: 'Office of Electronic Communications'
+      brand_address_1: '7/9 Giełdowa Street'
+      brand_address_2: '01-211 Warsaw'
+      brand_note: 'Regulator of the telecommunications and postal market in Poland, EU'
+      contact: 'Contact'
+      contact_mail: 'bi@uke.gov.pl'
+      contact_phone: '+48 22 53 49 186'
+      contact_fax: '+48 22 53 49 267'
+      links: 'Links'
+  static_pages:
+    home:
+      title: 'UKE Inwentaryzacja'
+      slide_0: 'Access to documents can be simple.'
+      slide_1: 'Just one click...'
+      slide_2: '...to see the whole world.'
+    declaration:
+      title: 'Accessibility declaration'
+      navbar: 'Accessibility declaration'
+  management: 'Management'
+  data: 'Data'
+  table_action: 'Action'
+  table_role_granted: 'Granted?'
+  table_group_member: 'Is a member?'
+  last_updated: 'Last updated'
+  sidebar: 'Side menu'
+  file_upload:
+    in_progress: 'Downloaded:'
+    wait_to_save: 'The data is being saved...'
+  archives:
+    sidebar_index:
+      new: 'Add new Archive'
+    sidebar_new:
+      index: 'Archives'
+      help: 'Help'
+    sidebar_edit:
+      index: 'Archives'
+      help: 'Help'
+    sidebar_show:
+      index: 'Archives'
+    index:
+      title: 'Archives'
+    show:
+      title: 'Archive'
+    new:
+      title: 'New Archive'
+    edit:
+      title: 'Edit -> Archive'
+    fieldset:
+      archivizations_title: 'Group Permission'
+  components:
+    components_tab:
+      folder_submit: 'Create'
+    index:
+      title: 'Attachments'
+    edit:
+      title: 'Edit'
+  groups:
+    sidebar_index:
+      new: 'Add new Group'
+    sidebar_new:
+      index: 'Groups'
+    sidebar_edit:
+      index: 'Groups'
+    sidebar_show:
+      index: 'Groups'
+    index:
+      title: 'Groups'
+    show:
+      title: 'Group'
+    new:
+      title: 'New Group'
+    edit:
+      title: 'Edit -> Group'
+    fieldset:
+      members_title: 'Members:'
+  roles:
+    sidebar_index:
+      new: Add new Role'
+    sidebar_new:
+      index: 'Roles'
+    sidebar_edit:
+      index: 'Roles'
+    sidebar_show:
+      index: 'Roles'
+    index:
+      title: 'Roles'
+    show:
+      title: 'Role'
+    new:
+      title: 'New Role'
+    edit:
+      title: 'Edit -> Role'
+  users:
+    sidebar_index:
+      new: 'Add new User'
+    sidebar_new:
+      index: 'Users'
+    sidebar_edit:
+      index: 'Users'
+    sidebar_show:
+      index: 'Users'
+    index:
+      title: 'Users'
+    show:
+      title: 'User'
+    edit:
+      title: 'Edit -> User'
+  works:
+    index:
+      title: 'Operation log'
+  group:
+    index:
+      title: 'Groups'
+    show:
+      title: 'Group'
+    new:
+      title: 'New Group'
+    edit:
+      title: 'Edit -> Group'
+    fieldset:
+      members_title: 'Members:'
+  activerecord:
+    models:
+      work: 'Operation log'
+      user: 'User'
+      role: 'Role'
+      group: 'Group'
+      archive: 'Archive'
+      component: 'Attachment'
+    attributes:
+      work:
+        created_at: 'Created at'
+        created_by: 'Author'
+        action: 'Action'
+        trackable_type: 'Object'
+        trackable_id: 'Id'
+        parameters: 'Data'
+      user:
+        wso2is_userid: 'WSO2IS userid'
+        email: 'Email'
+        first_name: 'First name'
+        last_name: 'Last name'
+        user_name: 'WSO2IS username'
+        csu_confirmed: 'CSU confirmed'
+        csu_confirmed_at: 'CSU confirmed at'
+        csu_confirmed_by: 'CSU confirmed by'
+        sign_in_count: 'Sign in count'
+        current_sign_in_at: 'Current sign in at'
+        last_sign_in_at: 'Last sign in at'
+        current_sign_in_ip: 'Current sign in - IP'
+        last_sign_in_ip: 'Last sign in - IP'
+        note: 'Description and comments'
+        fullname: 'Name'
+      role:
+        name: 'Name'
+        activities: 'Permissions'
+        note: 'Description and comments'
+      group:
+        name: 'Name'
+        note: 'Description and comments'
+      group/members:
+        user_id: 'User'
+        group_id: 'Group'
+        user: 'User'
+        group: 'Group'
+      archive:
+        name: 'Name'
+        expiry_on: 'access expires on'
+        note: 'Description of intended use, comments'
+        folders_count: 'Folders count'
+        files_count: 'Files count'
+        files_size_sum: 'Sum'
+        author_id: 'Author'
+        author: 'Author'
+        archivizations: 'Group permissions'
+        quota: 'Maximum size of all files'
+      archivization:
+        archive_id: 'Archive'
+        group_id: 'Group'
+        archivization_type_id: 'Permissions'
+        archive: 'Archive'
+        group: 'Group'
+        archivization_type: 'Permissions'
+      archive/archivizations:
+        archive_id: 'Archive'
+        group_id: 'Group'
+        archivization_type_id: 'Permissions'
+        archive: 'Archive'
+        group: 'Group'
+        archivization_type: 'Permissions'
+      component:
+        componentable: 'Attached to'
+        component_file: 'File/Folder'
+        component_file_identifier: 'Attachment'
+        file_content_type: 'Type'
+        file_size: 'Size'
+        file_size_or_badge: 'Info'
+        created_at: 'Created at'
+        updated_at: 'Updated at'
+        author_id: 'Author'
+        author: 'Author'
+        note: 'Description and comments'
+        name_if_folder: 'Folder'
+        name: 'Name'
+        sum_file_size: 'Maximum size of all files'
+        link_to_download: 'Link to download the file'
+        link_to_download_simple: 'Link to download the file without authorization (no login to CSU required!)'
+    errors:
+      models:
+        component:
+          attributes:
+            name:
+              taken: "'%{value}' already exists"
+      #   member:
+      #     attributes:
+      #       user_id:
+      #         taken: użytkownik %{model} %{attribute} %{value} jest już przypisany do tej grupy
+      messages:
+        file_size_is_in: 'file size must be between %{min} and %{max}'
+        file_size_is_less_than: 'file size must be less than %{count}'
+        file_size_is_less_than_or_equal_to: 'file size must be less than or equal to %{count}'
+        file_size_is_greater_than: 'file size must be greater than %{count}'
+        file_size_is_greater_than_or_equal_to: 'file size must be greater than or equal to %{count}'
+        allowed_file_content_types: 'file should be one of %{types}'
+        excluded_file_content_types: 'file cannot be %{types}'
+        record_invalid: "Validation failed: %{errors}"
+        restrict_dependent_destroy:
+          has_one: "Cannot delete record because a dependent %{record} exists"
+          has_many: "Cannot delete record because dependent %{record} exist"
+        created: 'Wystąpił błąd w czasie dodawania nowego wpisu.'
+        updated: 'Wystąpił błąd w czasie aktualizowania wpisu "%{data}".'
+        destroyed: 'Wystąpił błąd w czasie usuwania wpisu "%{data}".'
+        account_off: 'Wystąpił błąd w czasie wyłączania konta "%{data}".'
+        account_on: 'Wystąpił błąd w czasie włączania konta "%{data}".'
+        required: 'nie może być puste'
+        group_taken: 'The "%{group_name}" group with "%{archivization_type}" rights is alredy assigned.'
+        user_taken: '"%{user_name}" is alredy assigned.'
+    successfull:
+      messages:
+        created: 'The entry: "%{data}" has been successfully created.'
+        updated: 'The entry: "%{data}" has been successfully updated.'
+        destroyed: 'The entry: "%{data}" has been successfully destroyed.'
+        add_role: 'Użytkownikowi "%{parent}" pomyślnie dodano rolę "%{child}".'
+        remove_role: 'Użytkownikowi "%{parent}" została pomyślnie usunięta rola "%{child}".'
+        account_off: 'Pomyślnie wyłączono konto "%{data}".'
+        account_on: 'Pomyślnie włączono konto "%{data}".'
+        moved: 'Has(have) been successfully moved'
+        downloaded: '"%{data}" was successfully downloaded.'
+  pundit:
+    default: ' SECURITY: Access denied!'
+    work_policy:
+      index?: ' SECURITY: You cannot watch list of works!'
+    role_policy:
+      index?: ' SECURITY: You cannot watch list of roles!'
+      show?: ' SECURITY: You cannot watch this role!'
+      update?: ' SECURITY: You cannot edit this role!'
+      create?: ' SECURITY: You cannot create roles!'
+      destroy?: ' SECURITY: You cannot destroy roles!'
+      add_remove_role_user?: ' SECURITY: You cannot add/remove roles for users!'
+    user_policy:
+      index?: ' SECURITY: You cannot watch list of users!'
+      show?: ' SECURITY: You cannot watch this user!'
+      update?: ' SECURITY: You cannot edit this user!'
+      create?: ' SECURITY: You cannot create users!'
+      destroy?: ' SECURITY: You cannot destroy users!'
+      add_remove_role_user?: ' SECURITY: You cannot add/remove roles for users!'
+    group_policy:
+      index?: ' SECURITY: You cannot watch list of groups!'
+      show?: ' SECURITY: You cannot watch this group!'
+      update?: ' SECURITY: You cannot edit this group!'
+      create?: ' SECURITY: You cannot create groups!'
+      destroy?: ' SECURITY: You cannot destroy groups!'
+      add_remove_group_user?: ' SECURITY: You cannot add/remove groups for users!'
+  date:
+    abbr_day_names:
+    - Sun
+    - Mon
+    - Tue
+    - Wed
+    - Thu
+    - Fri
+    - Sat
+    abbr_month_names:
+    -
+    - Jan
+    - Feb
+    - Mar
+    - Apr
+    - May
+    - Jun
+    - Jul
+    - Aug
+    - Sep
+    - Oct
+    - Nov
+    - Dec
+    day_names:
+    - Sunday
+    - Monday
+    - Tuesday
+    - Wednesday
+    - Thursday
+    - Friday
+    - Saturday
+    formats:
+      default: "%Y-%m-%d"
+      long: "%B %d, %Y"
+      short: "%b %d"
+    month_names:
+    -
+    - January
+    - February
+    - March
+    - April
+    - May
+    - June
+    - July
+    - August
+    - September
+    - October
+    - November
+    - December
+    order:
+    - :year
+    - :month
+    - :day
+  datetime:
+    distance_in_words:
+      about_x_hours:
+        one: about 1 hour
+        other: about %{count} hours
+      about_x_months:
+        one: about 1 month
+        other: about %{count} months
+      about_x_years:
+        one: about 1 year
+        other: about %{count} years
+      almost_x_years:
+        one: almost 1 year
+        other: almost %{count} years
+      half_a_minute: half a minute
+      less_than_x_minutes:
+        one: less than a minute
+        other: less than %{count} minutes
+      less_than_x_seconds:
+        one: less than 1 second
+        other: less than %{count} seconds
+      over_x_years:
+        one: over 1 year
+        other: over %{count} years
+      x_days:
+        one: 1 day
+        other: "%{count} days"
+      x_minutes:
+        one: 1 minute
+        other: "%{count} minutes"
+      x_months:
+        one: 1 month
+        other: "%{count} months"
+      x_years:
+        one: 1 year
+        other: "%{count} years"
+      x_seconds:
+        one: 1 second
+        other: "%{count} seconds"
+    prompts:
+      day: Day
+      hour: Hour
+      minute: Minute
+      month: Month
+      second: Seconds
+      year: Year
+  success:
+    messages:
+      email_has_been_sent: 'Email has been sent'
+      make_user_in_select2: ' has been successfully created.'
+      wait_zip_created: 'Wait, a ZIP file is being created'
+  errors:
+    format: "%{attribute} - %{message}"
+    messages:
+      accepted: must be accepted
+      blank: can't be blank
+      present: must be blank
+      confirmation: doesn't match %{attribute}
+      empty: can't be empty
+      equal_to: must be equal to %{count}
+      even: must be even
+      exclusion: is reserved
+      greater_than: must be greater than %{count}
+      greater_than_or_equal_to: must be greater than or equal to %{count}
+      inclusion: is not included in the list
+      invalid: is invalid
+      less_than: must be less than %{count}
+      less_than_or_equal_to: must be less than or equal to %{count}
+      model_invalid: "Validation failed: %{errors}"
+      not_a_number: is not a number
+      not_an_integer: must be an integer
+      odd: must be odd
+      required: must exist
+      taken: has already been taken
+      too_long:
+        one: is too long (maximum is 1 character)
+        other: is too long (maximum is %{count} characters)
+      too_short:
+        one: is too short (minimum is 1 character)
+        other: is too short (minimum is %{count} characters)
+      wrong_length:
+        one: is the wrong length (should be 1 character)
+        other: is the wrong length (should be %{count} characters)
+      other_than: must be other than %{count}
+      bad_email: invalid email address
+      not_found_resource: There is no such resource
+    template:
+      body: 'There were problems with the following fields:'
+      header:
+        one: 1 error prohibited this %{model} from being saved
+        other: "%{count} errors prohibited this %{model} from being saved"
+  helpers:
+    actions: "Actions"
+    select:
+      prompt: Please select
+    submit:
+      create: Create %{model}
+      submit: Save %{model}
+      update: Update %{model}
+    links:
+      index: "Index"
+      back_to_index: "Back to list"
+      show: "Details"
+      show_link: 'Show'
+      new: "Add"
+      want_create: 'You want to create?'
+      edit: "Edit"
+      back: "Back"
+      back_from_new_or_edit: 'Cancel'
+      cancel: "Cancel"
+      confirm: "Are you sure?"
+      confirm_destroy: 'Are you sure delete: "%{data}"?'
+      confirm_add: 'Are you sure you want to add this entry?'
+      confirm_add_user: ' - Are you sure you want to add this entry to your user base?'
+      confirm_send_mail_for_archive: 'Are you sure you want to send e-mail to %{data}?'
+      confirm_send_mail_for_download: 'Are you sure you want to send e-mail with link to %{data}?'
+      confirm_send_mail_for_download_simple: 'Are you sure you want to send e-mail containing a link to download the file without authorization to %{data}?'
+      destroy: "Delete"
+      destroy_account: "Cancel my account"
+      send_email: "Send email"
+      send_email_to_all: "Send email to all"
+      download: "Download"
+      close: "Close"
+      filter: "Filtruj dane"
+      link_to_add_fields_nested: '[ + Add row ]'
+      link_to_remove_fields_nested: '[ - Remove row ]'
+      link_to_remove_fields_nested_small: '[ - ]'
+      not_exist_in_list:  'No entry in the selection list?'
+      help:  'Help'
+      copy_to_clipboard:  'Copy to Clipboard'
+    titles:
+      edit: "Edit %{model}"
+      save: "Save %{model}"
+      new: "New %{model}"
+      delete: "Delete %{model}"
+      change_your_password: "Change your password"
+  tooltip:
+    show: 'Show'
+    new: 'Add'
+    edit: 'Edit'
+    destroy: 'Destroy'
+    download: 'Download'
+    send_email: 'Send email'
+    add_fields_nested: 'Add next row'
+    remove_fields_nested: 'Remove row'
+  help_block_text:
+    select2user: 'Search by Name, Email. Separate words by space'
+    fileuploaddragdrop: 'Select a file(-s) or drag and drop'
+    select2_no_results: No results 
+  placeholder:
+    select2user: 'Select User'
+    select2group: 'Select Group'
+  number:
+    currency:
+      format:
+        delimiter: ","
+        format: "%u%n"
+        precision: 2
+        separator: "."
+        significant: false
+        strip_insignificant_zeros: false
+        unit: "$"
+    format:
+      delimiter: ","
+      precision: 3
+      separator: "."
+      significant: false
+      strip_insignificant_zeros: false
+    human:
+      decimal_units:
+        format: "%n %u"
+        units:
+          billion: Billion
+          million: Million
+          quadrillion: Quadrillion
+          thousand: Thousand
+          trillion: Trillion
+          unit: ''
+      format:
+        delimiter: ''
+        precision: 3
+        significant: true
+        strip_insignificant_zeros: true
+      storage_units:
+        format: "%n %u"
+        units:
+          byte:
+            one: Byte
+            other: Bytes
+          gb: GB
+          kb: KB
+          mb: MB
+          tb: TB
+          pb: PB
+          eb: EB
+    percentage:
+      format:
+        delimiter: ''
+        format: "%n%"
+    precision:
+      format:
+        delimiter: ''
+  support:
+    array:
+      last_word_connector: ", and "
+      two_words_connector: " and "
+      words_connector: ", "
+  time:
+    am: am
+    formats:
+      default: "%a, %d %b %Y %H:%M:%S %z"
+      long: "%B %d, %Y %H:%M"
+      short: "%d %b %H:%M"
+    pm: pm

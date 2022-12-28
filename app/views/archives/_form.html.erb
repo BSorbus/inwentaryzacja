@@ -1,0 +1,112 @@
+<div class="row">
+  <div class="col-sm-12">
+    <%= form_with(model: archive, local: true) do |f| %>
+
+      <% input_disabled ||= false  
+         #if input_disabled is not passed to the partial it doesn't crash. 
+         # We default it to false 
+      %>
+
+      <%= form_errors_for archive %>
+
+      <div class="row">
+        <div class="col-sm-6">
+          <div class="row">
+
+            <div class="form-group required col-sm-12">
+              <%= f.label :name, class: 'control-label' %>
+              <%= f.text_field :name, autofocus: true, class: 'form-control input-sm', disabled: input_disabled %>
+            </div>
+
+            <div class="form-group required col-sm-5">
+              <%= f.label :expiry_on, class: 'control-label' %>
+              <%= f.text_field :expiry_on, class: 'form-control input-sm datepicker', 
+                                disabled: input_disabled %>
+            </div>
+
+            <div class="form-group col-sm-7">
+              <%= f.label :quota, class: 'control-label' %>
+              <%= f.select :quota, 
+                    options_for_select(Archive::QUOTA_SIZES, selected: archive.quota), 
+                    { include_blank: false}, 
+                    { autofocus: false, class: 'form-control input-sm', 
+                      disabled: false } %>
+            </div>
+
+          </div>  <!-- /row -->
+        </div>  <!-- /col-sm-6 -->
+
+        <div class="col-sm-6">
+          <div class="row">
+
+            <div class="form-group col-sm-12">
+              <%= f.label :note, class: 'control-label' %>
+              <%= f.trix_editor :note %>
+              <%#= f.text_area :note, :rows => 4, class: 'form-control input-sm' %>
+            </div>
+
+          </div>  <!-- /row -->
+        </div>  <!-- /col-sm-6 -->
+      </div>  <!-- /row -->
+
+      <% if policy(archive).add_remove_archive_group? %>
+
+        <div class="row">
+          <div class="col-sm-12">
+
+            <fieldset class="my-fieldset">
+              <legend class="my-fieldset"><%= t('archives.fieldset.archivizations_title') %></legend>
+
+              <div class='archivizations clearfix'>
+
+                <div class="row">
+                  <div class="form-group required col-sm-5">
+                    <%= f.label Archivization.human_attribute_name(:group_id), class: 'control-label' %>
+                  </div>
+                  <div class="form-group required col-sm-5">
+                    <%= f.label Archivization.human_attribute_name(:archivization_type_id), class: 'control-label' %>
+                  </div>
+                </div>  <!-- /row -->
+
+                <div class='archivizations-sub-form'>
+                  <%= f.fields_for :archivizations, archive.archivizations.joins(:group).order('groups.name').reload do |archivization_form|  %>
+                    <%= render 'archivization_fields', f: archivization_form %> 
+                  <% end %>
+                </div>
+                <%= link_to_add_fields( t("helpers.links.link_to_add_fields_nested"), f, :archivizations) %>
+
+              </div>
+
+            </fieldset>
+
+          </div> <!--/col-sm-12 -->
+        </div>  <!-- /row -->
+
+      <% end %>
+
+
+      <hr class="hr-without-top-margin">
+
+      <div class="row">
+        <div class="col-sm-12">
+
+          <%= link_to archive.new_record? ? archives_path() : archive_path(archive.id), class: "btn btn-default" do %>
+            <%= back_from_new_or_edit_legend %>
+          <% end %>
+          
+          <%= f.submit nil, class: 'btn btn-success' %>
+
+        </div> <!--/col-sm-12 -->
+      </div> <!-- /row -->
+      
+    <% end %>
+
+  </div> <!--/col-sm-12-->
+</div>
+
+
+<div id="myModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content"></div>
+  </div>
+</div>

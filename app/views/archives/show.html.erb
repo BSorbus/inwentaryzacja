@@ -1,0 +1,42 @@
+<div class="grid-container">
+
+  <div class="sidebar">
+    <%= render 'sidebar_show' %>
+  </div>
+
+  <div class="main-content">
+    <br>
+    <div class="container-fluid"> 
+      <div class="row">
+        
+        <div class="col-sm-12">
+          <div class="tab-content clearfix">
+
+            <div class="tab-pane active" id="archive_show">
+              <%= render 'data', input_disabled: true, subtitle: archive_info_legend(@archive) %>
+            </div>
+
+            <div class="tab-pane" id="components">
+              <%= render 'components/components_tab', componentable: @archive, subtitle: archive_info_legend(@archive) %>
+            </div>
+
+            <div class="tab-pane" id="works">
+              <%= render 'works/works_tab', trackable_type: "Archive", trackable_id: @archive.id, subtitle: archive_info_legend(@archive) %>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+
+    </div> <!--/container-fluid--> 
+  </div> <!--/main-content--> 
+
+</div> <!--/grid-containe--> 
+
+
+<div id="myModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content"></div>
+  </div>
+</div>

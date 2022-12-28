@@ -1,0 +1,97 @@
+<% if user_signed_in? %>
+
+  <% archive_index_access = policy(:archive).index? || policy(:archive).index_self? %>
+  <% menagment_access = policy(:user).index? || policy(:role).index?  || policy(:group).index? || policy(:work).index? %>
+
+  <% if archive_index_access || menagment_access %>
+
+    <li class="dropdown">
+      <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="fa fa-database"></span>&nbsp;<%= t("data") %> <span class="caret"></span></a>
+
+      <ul class="dropdown-menu">
+
+        <% if archive_index_access %>
+          <li>
+            <%= link_to archives_path do %>
+              <span><%= archive_index_legend %></span>
+            <% end %>
+          </li>
+        <% end %>
+
+        <% if menagment_access %>
+          <li class="divider"></li>
+        <% end %>
+
+        <% if policy(:user).index? %>
+          <li>
+            <%= link_to users_path do %>
+              <span><%= user_index_legend %></span>
+            <% end %>
+          </li>
+        <% end %>
+
+        <% if policy(:role).index? %>
+          <li>
+            <%= link_to roles_path do %>
+              <span><%= role_index_legend %></span>
+            <% end %>
+          </li>
+        <% end %>
+
+        <% if policy(:group).index? %>
+          <li>
+            <%= link_to groups_path do %>
+              <span><%= group_index_legend %></span>
+            <% end %>
+          </li>
+        <% end %>
+
+        <% if policy(:work).index? %>
+          <li class="divider"></li>
+          <li>
+            <%= link_to works_path do %>
+              <span><%= work_index_legend %></span>
+            <% end %>
+          </li>
+        <% end %>
+
+      </ul>
+    </li>
+  <% end %>
+
+
+  <li class="dropdown">
+    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="fa fa-user"></span>&nbsp;<%= current_user.name %> <span class="caret"></span></a>
+
+    <ul class="dropdown-menu">
+
+      <li>
+        <%= link_to destroy_user_session_path, :method=>'delete' do %>
+          <span class="glyphicon glyphicon-log-out"></span>&nbsp;<%=t "devise.link_to.sign_out" %>
+        <% end %>
+      </li>
+
+    </ul>
+  </li>
+
+<% else %>
+  <li>
+    <%= link_to new_user_session_path do %>
+      <span class="glyphicon glyphicon-log-in"></span>&nbsp;<%=t "devise.link_to.sign_in" %>
+    <% end %>
+  </li>
+<% end %>
+
+
+<% unless "#{locale}" == "en" %>
+  <li>
+    <%= link_to image_tag('en.png', alt: 'EN', class: "img img-thumbnail", width: 28), { locale: :en } %>
+  </li>
+<% end %>
+<% unless "#{locale}" == "pl" %>
+  <li>
+    <%= link_to image_tag('pl.png', alt: 'PL', class: "img img-thumbnail", width: 28), { locale: :pl } %>
+  </li>
+<% end %>
+
+

@@ -1,0 +1,37 @@
+function markMatchOneWord (text, term) {
+  if (text) {
+    // Find marked before, find class <span class='select2-match'>
+    var markedPreviousIndexStart = text.indexOf( "<span class='select2-match'>" );
+    // Find where the match is
+    if (markedPreviousIndexStart >= 0) {
+      return text;
+    } else {
+      // Find where the match is
+      var match = text.toUpperCase().indexOf(term.toUpperCase());
+      // If there is no match
+      if (match < 0) {
+        return text;
+      } else {
+        // text is before the match
+        var leftStr = text.substring(0, match);
+        // matched text
+        var matchStr = "<span class='select2-match'>" + text.substring(match, match + term.length) + "</span>";
+        // text after the match
+        rightStr = text.substring(match + term.length);
+        return leftStr + matchStr + rightStr;
+      }
+    }
+  } else {
+    return "";
+  }
+};
+
+function markMatch (text, term) {
+  var separateWords = term.split(" ");
+  var allMatchedStr = text;
+  separateWords.forEach (function(e) {
+    allMatchedStr = markMatchOneWord (allMatchedStr, e);
+  }); 
+  return allMatchedStr;
+};
+

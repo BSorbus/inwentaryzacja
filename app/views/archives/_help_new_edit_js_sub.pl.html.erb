@@ -1,0 +1,89 @@
+<div>
+
+  <blockquote>
+  	<h4 class="text-justify">Tworzyć Składnice mogą jedynie użytkownicy posiadający uprawnienie <strong>"Kreator Składnic"</strong> lub <strong>"Administrator Składnic"</strong>. Aktualizować istniejące Składnice mogą jedynie "Administratorzy Składnic", jej twórca lub osoby, które należą do grupy, której nadano uprawnienie modyfikowania tej Składnicy.</h4>
+  </blockquote>	
+
+  <br>
+  <h4>
+  	Tworzenie (aktualizacja) Składnicy wymaga:
+  </h4>
+
+	<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+	  <div class="panel panel-brand">
+	    <div class="panel-heading" role="tab" id="headingOne">
+	      <h4 class="panel-title">
+	        <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+	          1. Określenia <strong>Nazwy</strong> i opisu Składnicy
+	        </a>
+	      </h4>
+	    </div>
+	    <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
+	      <div class="panel-body">
+<!-- 
+	      	<div class="img-in-modal"><%#= image_tag("projekt_pit2.png") %></div>
+ -->
+	        <h4 class="text-justify">
+	        	<strong><i>Nazwa</i></strong> Składnicy musi być <strong>unikalna</strong> i winna odzwierciedlać jej przeznaczenie, np.: "PROJEKT PIT2" lub "Dokumentacja BI.WUR.5101.956.2020" <br>
+	        	W polu <strong><i>Uwagi</i></strong> wskazane jest wprowadzenie krótkiego opisu dotyczącego przeznaczenia Składnicy, np.: "Składnica wymiany plików związanych z projektem PIT2" lub "Składnica udostępnionych akt w sprawie BI.WUR.5101.956.2020"
+	        </h4>
+	      </div>
+	    </div>
+	  </div>
+	  <div class="panel panel-brand">
+	    <div class="panel-heading" role="tab" id="headingTwo">
+	      <h4 class="panel-title">
+	        <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+	          2. Nadania <strong>uprawnień dostępu do Składnicy</strong>
+	        </a>
+	      </h4>
+	    </div>
+	    <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+	      <div class="panel-body">
+	      	<h4 class="text-justify">
+	      		Nadane <strong>uprawnienia dostępu do Składnicy</strong> definiują w jaki sposób użytkownicy będący członkami określonych grupy widzą i mogą obsługiwać daną <strong>Składnicę</strong> (Składnicę, a nie pliki wewnątrz tej Składnicy!). Siła uprawnień dotycząca definiowanej Składnicy określana jest wartością pozycji listy zaczynającą się od <strong>"Składnica: "</strong>
+	      		<br><br>
+	      		<strong>Składnica: [Odczyt]</strong>
+	      		<br> 
+	      		To uprawnienie pozwala użytkownikom należącym do Grupy czytać informacje dotyczące Składnicy. Nadaj to standardowe uprawnienie wszystkim Grupom, które mają mieć prawo korzystania z tej Składnicy.
+	      		<% if policy(:archive).more_privilage_in_role? %>
+		      		<br><br>
+		      		<strong>Składnica: [Odczyt, Aktualizacja nazwy i opisu, Nadawanie Uprawnień]</strong><br>
+		      		To zaawansowane uprawnienie winno być przyznane tylko tym Grupom użytkowników, którzy będą zarządzać daną Składnicą. Bądź ostrożny z nadawaniem tego uprawnienia i <span class="text-danger"><strong>bezwzględnie wystrzegaj się nadawania tak silnych uprawnień Grupom w skład których wchodzą użytkownicy spoza UKE</strong></span>.
+		      		<br><br>
+		      		<strong>Składnica: [Odczyt, Aktualizacja nazwy i opisu, Nadawanie Uprawnień, Usuwanie, Audyt]</strong><br> 
+	        		To najbardziej zaawansowane uprawnienie winno być przyznane tylko Administratorom oraz Audytorom. <span class="text-danger"><strong>Bezwzględnie wystrzegaj się nadawania tak silnych uprawnień Grupom w skład których wchodzą użytkownicy spoza UKE</strong></span>.
+        		<% end %>
+	      	</h4>
+	      </div>
+	    </div>
+	  </div>
+	  <div class="panel panel-brand">
+	    <div class="panel-heading" role="tab" id="headingThree">
+	      <h4 class="panel-title">
+	        <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+	          3. Nadania <strong>uprawnień dostępu do Plików wewnątrz</strong> Składnicy
+	        </a>
+	      </h4>
+	    </div>
+	    <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
+	      <div class="panel-body">
+	      	<h4 class="text-justify">
+	      		Nadane <strong>uprawnienia dostępu do Plików</strong> definiują w jaki sposób użytkownicy będący członkami określonych grupy mogą obsługiwać dane <strong>wewnątrz</strong> Składnicy. Siła uprawnień dotycząca plików wewnątrz Składnicy określana jest wartością pozycji listy zaczynającą się od <strong>"Pliki wewnątrz: "</strong>
+	      		<br><br>
+	      		<strong>Pliki wewnątrz: [Odczyt]</strong>
+	      		<br> 
+	      		To uprawnienie pozwala użytkownikom należącym do Grupy czytać informacje dotyczące Pliku/Folderu oraz pobierać pliki. Nadaj to standardowe uprawnienie wszystkim Grupom, które mają mieć prawo korzystania z tej Składnicy.
+	      		<br><br>
+	      		<strong>Pliki wewnątrz: [Odczyt, Zapis, Usuwanie]</strong><br>
+	      		To uprawnienie winno być przyznane tym Grupom użytkowników, którzy będą dodwali i usuwali pliki oraz aktualizowali ich opis. Bądź ostrożny z nadawaniem tego uprawnienia Grupom w skład których wchodzą użytkownicy spoza UKE.
+	      		<br><br>
+	      		<strong>Pliki wewnątrz: [Odczyt, Zapis, Usuwanie, Audyt]</strong><br> 
+        		Siła dostępu jak powżej + możliwość przeglądania historii wpisów.
+	      	</h4>
+	      </div>
+	    </div>
+	  </div>
+	</div>
+
+</div>

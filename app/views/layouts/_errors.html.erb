@@ -1,0 +1,22 @@
+<% content_for :form_errors do %>
+  <div id="error_explanation" class="panel panel-danger">
+    <div class="panel-heading">
+      <div class="panel-title">
+        <span class="glyphicon glyphicon-flash">&nbsp;Uwaga!</span>
+
+        <button type="button" class="close" data-target="#error_explanation" data-dismiss="alert"> <span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
+        </button>
+
+      </div> 
+    </div>
+
+    <div class="panel-body">
+      <ul>
+      <% object.errors.full_messages.each do |msg| %>
+        <li><h5><%= msg.force_encoding("UTF-8") %></h5></li>
+      <% end %>
+      </ul>
+    </div>
+  </div>
+<% end %>
+ 

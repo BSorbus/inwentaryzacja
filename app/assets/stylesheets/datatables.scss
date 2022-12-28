@@ -1,0 +1,170 @@
+@import 'datatables/jquery.dataTables';
+@import 'datatables/extensions/Responsive/responsive.dataTables';
+@import 'datatables/extensions/Buttons/buttons.dataTables';
+
+@import 'datatables/dataTables.bootstrap';
+
+//@import 'datatables/extensions/AutoFill/autoFill.bootstrap';
+@import 'datatables/extensions/Buttons/buttons.bootstrap';
+@import 'datatables/extensions/ColReorder/colReorder.dataTables';
+//@import 'datatables/extensions/ColReorder/colReorder.bootstrap';
+@import 'datatables/extensions/FixedColumns/fixedColumns.dataTables';
+//@import 'datatables/extensions/FixedColumns/fixedColumns.bootstrap';
+//@import 'datatables/extensions/FixedHeader/fixedHeader.bootstrap';
+//@import 'datatables/extensions/KeyTable/keyTable.bootstrap';
+@import 'datatables/extensions/Responsive/responsive.bootstrap';
+//@import 'datatables/extensions/RowGroup/rowGroup.bootstrap';
+//@import 'datatables/extensions/RowReorder/rowReorder.bootstrap';
+@import 'datatables/extensions/RowReorder/rowReorder.dataTables';
+//@import 'datatables/extensions/Scroller/scroller.bootstrap';
+@import 'datatables/extensions/Select/select.bootstrap';
+
+
+//blokuje wyswietlanie icon "drzewko"
+//.DataTable > thead > tr > th[class*="sort"]:after{
+//    color: "red" !important;
+//}
+
+table.dataTable thead .sorting:after {
+    content: "";
+}
+table.dataTable thead .sorting_desc:after {
+    content: "";
+}
+table.dataTable thead .sorting_asc:after {
+    content: "";
+}
+
+
+div.dt-buttons {
+  margin-left: 10px;
+  float: right;
+}
+
+tfoot {
+    display: table-header-group;
+}
+
+//tfoot {
+//  display: table-row-group;
+//}
+
+table.dataTable {
+    border-bottom: 1px solid black !important;
+}
+
+table.dataTable tfoot th {
+  border-top: 0;
+  border-bottom: 1px solid black;
+}
+
+
+  input.column_filter {
+    margin-top: -5px;
+    margin-left: -5px;
+  };
+  select.column_filter {
+    margin-top: -5px;
+    margin-left: -5px;
+  }
+
+
+//tr {
+//  background-color: lighten(#BECC25, 48.5%);
+//}
+//tr:hover{
+//  background-color: #779BE5
+//}
+//td:hover {
+//  background-color: lighten(#BECC25, 48.5%)
+//}
+
+.datatable-cell-sign_up {
+  background-color: #FFFFE0 !important; //LightYellow
+}
+
+.datatable-cell-sign_in {
+  background-color: #DFF0D8 !important;
+}
+
+.datatable-cell-sign_out {
+  background-color: #DFF0D8 !important;
+}
+
+.datatable-cell-sending_reset_password_instructions {
+  background-color: #FFFFE0 !important;
+}
+
+.datatable-cell-sending_unlock_instructions {
+  background-color: #FFFFE0 !important;
+}
+
+.datatable-cell-account_confirmation {
+  background-color: #FFFACD !important;
+}
+
+.datatable-cell-resetting_password_from_token {
+  background-color: #FFFACD !important;
+}
+
+.datatable-cell-unlocking_from_token {
+  background-color: #FFFACD !important;
+}
+
+.datatable-cell-account_off {
+  background-color: #FFC04D !important;
+}
+
+.datatable-cell-account_on {
+  background-color: #FFC04D !important;
+}
+
+.datatable-cell-unauthenticated {
+  background-color: #FF8C8C !important;
+}
+
+.datatable-cell-archive-expired-on {
+  background-color: #FFCCCC !important;
+}
+
+.datatable-cell-archive-expires-today {
+  background-color: #FFCCCC !important;
+}
+
+.datatable-cell-archive-expires-today {
+  background-color: #FFE6CC !important;
+}
+
+.datatable-cell-archive-expiry-reminder {
+  background-color: #FFFFCC !important;
+}
+
+.datatable-cell-archive-expiry-ok {
+  background-color: #DFF0D8 !important;
+}
+
+
+.dataTables_processing {
+    position: absolute;
+    top: 0px;
+    left: 50%;
+    width: 250px;
+    margin-left: -125px;
+    border: none;
+    //border: 1px solid #ddd;
+    text-align: center;
+    color: #999;
+    font-size: 11px;
+    padding: 2px 0;
+}
+
+.dataTables_wrapper .dataTables_paginate .paginate_button {
+    padding : 0px;
+    margin-left: 0px;
+    display: inline;
+    border: 0px;
+}
+
+.dataTables_wrapper .dataTables_paginate .paginate_button:hover {
+    border: 0px;
+}

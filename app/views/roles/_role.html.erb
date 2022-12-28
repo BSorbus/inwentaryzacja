@@ -1,0 +1,14 @@
+<td class="col-md-2">
+  <%= role.name_as_link %>
+</td>
+<td class="col-md-6">
+  <%= role.activities %>
+</td>
+<td class="col-md-3">
+  <%= truncate(role.note, length: 50) %>
+</td>
+<!--
+<td>
+  <%#= link_to("Delete role", role_path(role), :data => { :confirm => "Are you sure?" }, :method => :delete, :class => 'button-xs-danger') %>
+</td>
+-->

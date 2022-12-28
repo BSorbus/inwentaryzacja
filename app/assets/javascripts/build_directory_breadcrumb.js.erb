@@ -1,0 +1,192 @@
+function buildDirectoryBreadcrumb(nameIdBreadcrumb, arrayIdParentInput, nameLinkToFunction, ancestry_json){
+
+  // set parent_id for upload or create folder
+  arrayIdParentInput.forEach (function(element) {
+    document.getElementById(element).value = ancestry_json.parent_id;
+  });
+
+  // clear htm -d_breadcrumb
+  document.getElementById(nameIdBreadcrumb).innerHTML = "";
+
+  var olNode = document.createElement("OL"); 
+  olNode.className = "breadcrumb";
+  // add breadcrumb root 
+  olNode.appendChild( addNavItemToBreadcrumb(nameLinkToFunction +'( { parent_id: null, ancestry_path: [], ancestor_ids: [] } );return false;', 'Katalog główny', false, null ) );
+
+  var reverseAncestryIds,
+      anchoredElText,
+      anchoredElHref,
+      anchoredElActive,
+      tmpAncestryPath,
+      tmpAncestryPathString,
+      tmpAncestorIds,
+      tmpAncestorIdsReverse;
+
+  reverseAncestryIds = ancestry_json.ancestor_ids.reverse();
+  reverseAncestryIds[(ancestry_json.ancestry_path.length - 1)] = null;
+  tmpAncestryPath = [];
+  tmpAncestorIds = []
+
+  // build breadcrumb lists
+  ancestry_json.ancestry_path.forEach (function(element, index) {
+
+    tmpAncestryPath.push(ancestry_json.ancestry_path[index]);
+    tmpAncestryPathString = '[' + tmpAncestryPath.map(x => "'" + x + "'").toString() +']';
+
+    tmpAncestorIds.push(reverseAncestryIds[index]);
+    // remove null, revert to original, remove first element
+    tmpAncestorIdsReverse = tmpAncestorIds.filter(e => e != null).reverse()
+    if (tmpAncestorIdsReverse.length > 0) {
+      tmpAncestorIdsReverse.shift();
+    }
+
+    anchoredElText = ancestry_json.ancestry_path[index];
+    // if last position set breadcrumb without <a></a>
+    anchoredElActive = (reverseAncestryIds[index] === null); 
+    anchoredElHref = nameLinkToFunction +'( { parent_id:'+ JSON.stringify(reverseAncestryIds[index]) +', ancestry_path: '+ tmpAncestryPathString +', ancestor_ids: '+ JSON.stringify(tmpAncestorIdsReverse) +' } );return false;' 
+    // build breadcrumb pice for current position
+    olNode.appendChild( addNavItemToBreadcrumb( anchoredElHref, anchoredElText, anchoredElActive, reverseAncestryIds[index] ) );
+  }); 
+  // Add all html to id_breadcrumb
+  document.getElementById(nameIdBreadcrumb).appendChild(olNode);
+};
+
+
+function addNavItemToBreadcrumb(href, text, active, breadcrumb_parent_id) {
+    var listItem = document.createElement('LI'),
+        anchorItem = document.createElement('A'),
+        textNode = document.createTextNode(text);
+
+    if (active === true) {
+      listItem.className = 'active';
+      listItem.appendChild(textNode)
+    } else {
+      // anchorItem.href = href;      
+      anchorItem.href = '#';
+      anchorItem.setAttribute('onclick', href+';');
+      anchorItem.setAttribute('breadcrumb_parent_id', breadcrumb_parent_id);
+      anchorItem.addEventListener('dragover', handleBreadcrumbDragOver, false);
+      anchorItem.addEventListener('dragleave', handleBreadcrumbDragLeave, false);
+      anchorItem.addEventListener('drop', handleBreadcrumbDrop, false);
+      listItem.appendChild(anchorItem);
+      anchorItem.appendChild(textNode);
+    };
+
+    return listItem
+};
+
+
+function handleBreadcrumbDragOver(e) {
+
+  if (e.preventDefault) {
+    e.preventDefault(); // Necessary. Allows us to drop.
+  }
+
+  //this.style.opacity = '0.4';
+
+//   console.log(e.target.attributes.breadcrumb_parent_id); 
+// //  console.log(e.target); 
+
+//   var transferObj = e.dataTransfer.getData('text/plain');
+//   var transferObjParsed = JSON.parse(e.dataTransfer.getData('text/plain'));
+// //  var dragSrcRow = JSON.parse(transferObj);
+// //  var srcTable = transferObjParsed.dragSrcRow.parentNode.parentNode.id;
+// //  console.log( srcTable );
+//   console.log( transferObjParsed );
+// //  console.log( dragSrcRow.parentNode.parentNode.id );
+
+// //  console.log($('#' + srcTable).DataTable().row(dragSrcRow).data());
+
+  e.dataTransfer.dropEffect = 'move'; 
+  return false;
+
+}
+
+function handleBreadcrumbDragLeave(e) {
+  // this / e.target is previous target element.
+  // Remove the drop zone when leaving element
+  //console.log("----Jestem poza celem upuszczania");
+  this.classList.remove('over');  
+}
+
+function handleBreadcrumbDrop(e) {
+  // console.log("handleDrop(e)");
+  // this / e.target is current target element.
+
+  if (e.preventDefault) {
+    e.preventDefault(); // Necessary. Allows us to drop.
+  }
+
+  if (e.stopPropagation) {
+    e.stopPropagation(); // stops the browser from redirecting.
+  }
+
+  // console.log('--------fired handleBreadcrumbDrop(e) ----------------')
+
+//  console.log("e.target.attributes.breadcrumb_parent_id:", e.target.attributes.breadcrumb_parent_id); 
+//  console.log(e.target); 
+
+  if (e.target.attributes.breadcrumb_parent_id.value != 'null') {
+    var parentId = e.target.attributes.breadcrumb_parent_id.value;
+  } else {
+    var parentId = "";
+  }
+
+  var transferObjParsed = JSON.parse(e.dataTransfer.getData('text/plain'));
+
+//  var dragSrcRow = JSON.parse(transferObj);
+//  var srcTable = transferObjParsed.dragSrcRow.parentNode.parentNode.id;
+//  console.log( srcTable );
+//  console.log( "transferObjParsed:", transferObjParsed );
+  // console.log( "parentId:", parentId );
+  // console.log( "transferObjParsed.srcSelectedRowIds:", transferObjParsed.srcSelectedRowIds );
+
+  children = [];
+
+  if (transferObjParsed.srcSelectedRowIds.length > 0) {
+    children = transferObjParsed.srcSelectedRowIds;
+  } else {
+    children.push(transferObjParsed.dragSrcRowId);
+  };
+
+  var url_move_path = '';
+  switch(transferObjParsed.srcTable) {
+    case 'attachmenable-attachments':
+      url_move_path = '/attachments/move_to_parent';
+      break;
+    case 'componentable-components':
+      url_move_path = '/' + $('#componentable-components').data('locale') + '/components/move_to_parent';
+      break;
+    default:
+      url_move_path = '';
+  };
+
+  $.ajax({
+    url: url_move_path,
+//    url: '/components/move_to_parent',
+//    url: '/attachments/move_to_parent',
+    type: 'PATCH',
+    async: true,
+    data: {
+      parent_id: parentId,
+      children_ids: children
+    },
+    success: function (response) {
+      // oAttachmentableAttachmentsTable.draw();
+      // To powyzej jest OK, ale ponizej bardziej uniwersalne
+      $('#' + transferObjParsed.srcTable).DataTable().draw();
+      // toastr['success']('wiersz(-e) został(-y) pomyślnie przeniesiony(-e)');
+    },
+    error: function (xhr, ajaxOptions, thrownError) {
+      console.log(xhr);
+      if (xhr.status == 401) {
+        window.location.reload();
+      } else {
+        getErrorMessage(xhr, thrownError);
+      }
+    }
+  });
+
+  return false;
+}
+

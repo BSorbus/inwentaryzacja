@@ -1,0 +1,165 @@
+<div class="modal-header">
+  <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+  <h4 id="myModalLabel"><strong><%= @component.fullname %></strong></h4>
+</div>
+<div class="modal-body">
+
+
+  <div class="row">
+    <div class="form-group col-sm-12">
+
+      <% if @component.is_folder? %>
+
+        <div class="row">
+            <div class="form-group col-sm-12">
+              <p><strong><%= Component.human_attribute_name(:name_if_folder) %></strong></p>
+              <%= @component.name_if_folder %>
+            </div>
+
+            <div class="form-group col-sm-12">
+              <% if @component.note.html_safe.size > 0 %>
+                <blockquote>
+                  <%= @component.note.html_safe %>
+                </blockquote>
+              <% end %>
+            </div> 
+        </div> 
+
+      <% else %>
+
+        <div class="row">
+          <div class="form-group col-sm-12">
+            <p><strong><%= Component.human_attribute_name(:component_file_identifier) %></strong></p>
+            <%= @component.component_file_identifier %>
+          </div> 
+          <div class="form-group col-sm-12">
+            <% if @component.note.html_safe.size > 0 %>
+              <blockquote>
+                <%= @component.note.html_safe %>
+              </blockquote>
+            <% end %>
+          </div> 
+          <div class="form-group col-sm-4">
+            <p><strong><%= Component.human_attribute_name(:file_size) %></strong></p>
+            <%= @component.file_size %>
+          </div> 
+          <div class="form-group col-sm-4">
+            <p><strong><%= Component.human_attribute_name(:file_content_type) %></strong></p>
+            <%= @component.file_content_type %>
+          </div> 
+          <div class="form-group col-sm-4">
+            <p><strong><%= Archive.human_attribute_name(:expiry_on) %></strong></p>
+            <%= @component.componentable.expiry_on %>
+          </div> 
+        </div> 
+
+        <div class="row">
+          <div class="col-sm-12">
+
+            <fieldset class="my-fieldset">
+              <legend class="my-fieldset colored-title"><%= Component.human_attribute_name(:link_to_download) %></legend>
+
+              <% access_to_send_link_download = policy(@component).archive_send_link_to_component_download? %>
+
+              <div class="input-group">
+                <input id="component_to_download" type="text" class="form-control" value='<%= @file_url_as_html %>' readonly='true'>
+                <div class="input-group-btn">
+                  <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><%= t('table_action') %> <span class="caret"></span></button>
+                  <ul class="dropdown-menu dropdown-menu-right">
+                    <li><a href="#" class="btn-clip" data-clipboard-target="#component_to_download"><%= copy_to_clipboard_legend %></a></li>
+                    <li><a href="#div_send_email_for_download" data-toggle="collapse"><%= send_email_with_share_legend %></a></li>
+                  </ul>
+                </div>
+              </div>
+
+
+              <!-- collapse segment -->
+              <div id="div_send_email_for_download" class="well-users collapse">
+
+                <button type="button" class="close" data-target="#div_send_email_for_download" data-toggle="collapse"> <span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+
+                <br>
+                <%= render 'download_info', cached: true %>
+                <%= render 'download_users', access: access_to_send_link_download %>
+
+              </div> <!-- /collapse segment -->
+            </fieldset>
+
+          </div> <!-- /class="col-sm-12" -->
+        </div> <!-- /class="row" -->
+
+
+        <div class="row">
+          <div class="col-sm-12">
+
+            <fieldset class="my-fieldset">
+              <legend class="my-fieldset text-danger"><%= Component.human_attribute_name(:link_to_download_simple) %></legend>
+
+              <% access_to_send_link_download_simple = policy(@component).archive_send_link_to_component_download_simple? %>
+
+              <div class="input-group">
+                <input id="component_to_download_simple" type="text" class="form-control" value='<%= @file_url_as_html_to_simple %>' readonly='true'>
+                <div class="input-group-btn dropup">
+                  <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><%= t('table_action') %> <span class="caret"></span></button>
+                  <ul class="dropdown-menu dropdown-menu-right">
+                    <li><a href="#" class="btn-clip" data-clipboard-target="#component_to_download_simple"><%= copy_to_clipboard_legend %></a></li>
+                    <li><a href="#div_send_email_for_download_simple" data-toggle="collapse"><%= send_email_with_share_legend %></a></li>
+                  </ul>
+                </div>
+              </div>
+
+              <!-- collapse segment -->
+              <div id="div_send_email_for_download_simple" class="well-users collapse">
+
+                <button type="button" class="close" data-target="#div_send_email_for_download_simple" data-toggle="collapse"> <span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
+                </button>
+
+                <br>
+                <%= render 'download_simple_info', cached: true %>
+                <%= render 'download_simple_users', access: access_to_send_link_download_simple %>
+                <%= render 'download_simple_adhoc', access: access_to_send_link_download_simple %>
+
+              </div><!-- /collapse segment -->
+            </fieldset>
+
+          </div> <!-- /class="col-sm-12" -->
+        </div> <!-- /class="row" -->
+
+      <% end %>
+
+    </div> <!-- /form-group col-sm-12 -->
+
+  </div>  <!-- /row -->
+
+
+</div>
+<div class="modal-footer">
+  <button class="btn btn-primary" data-dismiss="modal" aria-hidden="true">Zamknij</button>
+</div>
+
+<script type="text/javascript">
+
+  $(document).ready(function(){  
+
+//    var clipboard = new ClipboardJS('.btn-clip');
+    var clipboard = new ClipboardJS('.btn-clip', {
+        container: document.getElementById('modal')
+    });
+
+    clipboard.on('success', function(e) {
+        // console.info('Action:', e.action);
+        // console.info('Text:', e.text);
+        // console.info('Trigger:', e.trigger);
+
+        //toastr['info']('Copy to Clipboard');        
+        e.clearSelection();
+    });
+
+clipboard.on('error', function(e) {
+    console.error('Action:', e.action);
+    console.error('Trigger:', e.trigger);
+});
+
+  });
+
+</script>

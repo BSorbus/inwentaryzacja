@@ -1,0 +1,122 @@
+<div id="tab_data">
+  <fieldset class="my-fieldset">
+    <legend class="my-fieldset colored-title"><%= subtitle %></legend>
+    <div class="row">
+
+      <div class="col-sm-12">
+        <% input_disabled ||= false  
+           #if input_disabled is not passed to the partial it doesn't crash. 
+           # We default it to false 
+        %>
+
+        <%= form_errors_for @user %>
+
+        <div class="row">
+          <div class="col-sm-6">
+            <div class="row">
+
+              <div class="form-group col-sm-6">
+                <p><strong><%= User.human_attribute_name(:user_name) %></strong></p>
+                <%= @user.user_name %>
+              </div>
+
+              <div class="form-group col-sm-6">
+                <p><strong><%= User.human_attribute_name(:email) %></strong></p>
+                <%= @user.email %>
+              </div>
+
+              <div class="form-group col-sm-6">
+                <p><strong><%= User.human_attribute_name(:first_name) %></strong></p>
+                <%= @user.first_name %>
+              </div>
+
+              <div class="form-group col-sm-6">
+                <p><strong><%= User.human_attribute_name(:last_name) %></strong></p>
+                <%= @user.last_name %>
+              </div>
+
+            </div>  <!-- /row -->
+          </div>  <!-- /col-sm-6 -->
+
+          <div class="col-sm-6">
+            <div class="row">
+              <div class="form-group col-sm-12">
+<!-- 
+                <p><strong><%= User.human_attribute_name(:note) %></strong></p>
+                <%= @user.note.html_safe %>
+                <%#= text_with_break_line(@user.note) %>
+ -->
+                <% if @user.note.html_safe.size > 0 %>
+                  <blockquote>
+                    <%= @user.note.html_safe %>
+                  </blockquote>
+                <% end %>
+              </div>
+            </div>
+          </div> <!--/col-sm-6 -->
+        </div>  <!-- /row -->
+
+        <div class="row">
+          <div class="col-sm-12">
+            <div class="row">
+
+              <div class="form-group col-sm-3">
+                <p><strong><%= User.human_attribute_name(:last_sign_in_at) %></strong></p>
+                <%= @user.last_sign_in_at.strftime("%Y-%m-%d %H:%M:%S") if @user.last_sign_in_at.present? %>
+              </div>
+              <div class="form-group col-sm-3">
+                <p><strong><%= User.human_attribute_name(:last_sign_in_ip) %></strong></p>
+                <%= @user.last_sign_in_ip if @user.last_sign_in_ip.present? %>
+              </div>
+
+              <div class="form-group col-sm-3">
+                <p><strong><%= User.human_attribute_name(:current_sign_in_at) %></strong></p>
+                <%= @user.current_sign_in_at.strftime("%Y-%m-%d %H:%M:%S") if @user.current_sign_in_at.present? %>
+              </div>
+              <div class="form-group col-sm-3">
+                <p><strong><%= User.human_attribute_name(:current_sign_in_ip) %></strong></p>
+                <%= @user.current_sign_in_ip if @user.current_sign_in_ip.present? %>
+              </div>
+
+            </div>
+
+          </div> <!-- /col-sm-12 -->
+        </div> <!-- /row -->
+
+        <hr class="hr-without-top-margin">
+
+        <div class="row">
+          <div class="col-sm-12">
+<!-- 
+            <%#= link_to users_path, class: "btn btn-default" do %>
+              <span class="fa fa-list"></span>
+              <%#= t("helpers.links.index") %>
+            <%# end %>
+ -->
+            <% if policy(@user).destroy? %>
+              <%= link_to user_path(@user),
+                                  method: :delete,
+                                  data: { confirm: t('helpers.links.confirm_destroy', data: @user.fullname) }, 
+                                  class: "btn btn-danger" do %>
+                <span class="fa fa-trash"></span>
+                <%= t("helpers.links.destroy") %>
+              <% end %>
+            <% end %>
+
+            <% if policy(@user).edit? %>
+              <%= link_to edit_user_path(@user), class: "btn btn-primary" do %>
+                <span class="fa fa-edit"></span>
+                <%= t("helpers.links.edit") %>
+              <% end %>
+            <% end %>
+
+            <h6 class="pull-right"><%= last_updated_legend(@user) %></h6>
+
+          </div> <!--/col-sm-12 -->
+        </div> <!-- /row -->
+
+      </div> <!--/col-sm-12-->  
+
+    </div>
+  </fieldset>
+</div>

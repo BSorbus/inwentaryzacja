@@ -1,0 +1,22 @@
+<div class="grid-container">
+
+  <div class="sidebar">
+    <%= render 'sidebar_edit' %>
+  </div>
+
+  <div class="main-content">
+    <br>
+    <div class="container-fluid"> 
+      <div class="row">
+        <div class="col-sm-12">
+          <fieldset class="my-fieldset">
+            <legend class="my-fieldset colored-title"><%= role_edit_legend(@role) %></legend>
+            <%= render 'form', role: @role %>
+          </fieldset>
+        </div>
+      </div>
+
+    </div> <!--/container-fluid--> 
+  </div> <!--/main-content--> 
+
+</div> <!--/grid-containe--> 

@@ -1,0 +1,564 @@
+$(document).ready(function() {
+
+  var dragSrcRow = null;     // Keep track of the source row
+  var selectedRows = null;   // Keep track of selected rows in the source table
+  var srcTable = '';  // Global tracking of table being dragged for 'over' class setting
+  var rows = [];      // Global rows for #example
+
+
+  $.fn.dataTable.ext.buttons.component_reset_col_vis_and_reorder = {
+    text: '<span class="text-primary fa fa-retweet"></span>',
+    // titleAttr: 'Przywróć domyślne ustawienia kolumn',
+    className: 'btn btn-sm btn-default',
+    action: function ( e, dt, button, config ) {
+      // revert colVis  // dt.columns(config.show).visible(true);
+      // 0-check, 1-ID, 2-NAME_IF_FOLDER 
+      dt.columns(':gt(3)').visible(true);
+
+      // revert colReorder
+      // dziala:        // $($.fn.dataTable.tables(true)).DataTable().colReorder.reset();
+      // dziala takze:  // oComponentableComponentsTable.colReorder.reset();
+      // i to równiez:
+      dt.colReorder.reset();
+      dt.state.clear();
+      dt.search('');
+      dt.draw();
+    }  
+  };
+
+  $.fn.dataTable.ext.buttons.component_download_selected = {
+    text: '<span class="text-primary fa fa-download"></span>',
+    //titleAttr: 'Pobierz zaznaczone wiersze jako plik .ZIP',
+    className: 'btn btn-sm btn-default',
+    init: function ( dt, node, config ) {
+      var that = this;
+      dt.on( 'select.dt.DT deselect.dt.DT', function () {
+        that.enable( dt.rows( { selected: true } ).any() );
+      });
+      this.disable();
+    },
+    action: function ( e, dt, button, config ) {
+      // $.map(oComponentableComponentsTable.rows( { selected: true } ).data(), function (item) {
+      // To powyzej jest OK, ale ponizej bardziej uniwersalne
+      var selectedArray = []
+      $.map(dt.rows( { selected: true } ).data(), function (item) {
+        selectedArray.push(item.id)
+      });
+
+      var component_ids = selectedArray;
+
+      $.ajax({
+        url: '/' + $('#componentable-components').data('locale') + '/components/zip_and_download.js',
+        type: 'GET',
+        async: true,
+        data: {
+          component_ids: component_ids
+        },
+        success: function (response) {
+          // toastr['success']("<%= I18n.t('success.messages.zip_created') %>");
+          null;
+        },
+        error: function (xhr, ajaxOptions, thrownError) {
+          if (xhr.status == 401) {
+            window.location.reload();
+          } else {
+            getErrorMessage(xhr, thrownError);
+          }
+        }
+      });
+
+    }
+  };
+
+  $.fn.dataTable.ext.buttons.component_delete_selected = {
+    text: '<span class="text-danger fa fa-trash"></span>',
+    //titleAttr: 'Usuń zaznaczone wiersze',
+    className: 'btn btn-sm btn-default',
+    init: function ( dt, node, config ) {
+      var that = this;
+      dt.on( 'select.dt.DT deselect.dt.DT', function () {
+        that.enable( dt.rows( { selected: true } ).any() );
+      });
+      this.disable();
+    },
+    action: function ( e, dt, button, config ) {
+      if (confirm('Czy na pewno chcesz usunąć zaznaczone wiersze?')) {
+        // To jest OK, ale ponizej bardziej uniwersalne
+        //$.map(oComponentableComponentsTable.rows( { selected: true } ).data(), function (item) {
+        $.map(dt.rows( { selected: true } ).data(), function (item) {
+
+          $.ajax({
+            url: '/' + $('#componentable-components').data('locale') + '/components/' + item.id,
+            // dataType: 'JSON',
+            type: 'DELETE',
+            async: true,
+            success: function (response) {
+              // oComponentableComponentsTable.draw();
+              // To powyzej jest OK, ale ponizej bardziej uniwersalne
+              dt.draw();
+              // toastr['success'](item.name + '<br>...został trwale usunięty');
+            },
+            error: function (xhr, ajaxOptions, thrownError) {
+              console.log(xhr);
+              if (xhr.status == 401) {
+                window.location.reload();
+              } else {
+                getErrorMessage(xhr, thrownError);
+              }
+            }
+          });
+
+        });
+      }
+    }  
+  };
+
+
+  var oComponentableComponentsTable = $('#componentable-components').DataTable({
+    // dom: 'lBfrtip',
+    dom: '<"top" <"row" <"col-sm-9" <"pull-left"l><"pull-left"B> > <"col-sm-3 pull-right"f> > > rt <"bottom"ip><"clear">',
+    buttons: [
+      'component_reset_col_vis_and_reorder',
+      {
+        extend:    'colvis',
+        text:      '<span class="text-primary fa fa-columns"></span>',
+        // define in datatables_controller
+        //titleAttr: 'Pokaż/ukryj kolumny',
+        className: 'btn btn-sm btn-default',
+        columns:   ':gt(3)' //exclude cols from list
+        // postfixButtons: [ 'colvisRestore' ]
+      }, 
+      {
+        extend:    'selectAll',
+        text:      '<span class="text-primary fa fa-check-square"></span>',
+        //titleAttr: 'Zaznacz wszystko',
+        className: 'btn btn-sm btn-default'
+      }, 
+      {
+        extend:    'selectNone',
+        text:      '<span class="text-primary fa fa-square"></span>',
+        //titleAttr: 'Odznacz wszystko',
+        className: 'btn btn-sm btn-default'
+      }, 
+      'component_download_selected',
+      'component_delete_selected'
+    ],
+    select: {
+      //style: 'os',
+      style: 'multi',
+      selector: 'td:first-child'
+    },
+//     colReorder: true,
+    colReorder: {
+      fixedColumnsLeft: 3
+    },
+// //    rowReorder: true,
+//     rowReorder: {
+// //      dataSrc: 'id',
+// //      selector: 'td:nth-child(2)'
+//       selector: 'td:not(:nth-child(1))'
+//     },
+    responsive: true,
+    processing: true,
+    serverSide: true,
+    deferRender: true,
+    searchDelay: 500,
+    stateSave: true,
+    stateDuration: 60 * 60 * 24 * 7,
+    ajax: { 
+      url: $('#componentable-components').data('source'),
+      type: "GET",
+      data: function(d){
+        //d.component_parent_id = 8501;
+        if (localStorage.getItem("cloud_component_breadcrumb") === null) {
+          d.component_parent_id = null
+        } else {
+          d.component_parent_id = JSON.parse(localStorage.getItem('cloud_component_breadcrumb')).parent_id;
+        }
+      },
+      error: function (jqXHR, exception) {
+        console.log(jqXHR);
+        if (jqXHR.status == 401) {
+          window.location.reload();
+        } else {
+          getErrorMessage(jqXHR, exception);
+        }
+      }
+    },
+    // pagingType: "full_numbers",
+    scrollY: "40vh",
+    //scrollY: 300,
+    paging: false,
+    lengthMenu: [[10, 15, 25, 50, 100, -1], [10, 15, 25, 50, 100, "Wszystkie"]],
+    iDisplayLength: -1,
+    rowId: 'id',
+    columns: [
+      {   
+        "data": null, 
+        "defaultContent": '',
+        "sortable": false,
+        "searchable": false,
+        "className": 'select-checkbox',
+        "orderable": false,
+      },
+      { "data": "id",
+        "visible": false,
+        "sortable": false,
+        "searchable": false
+      },
+      { "data": "name_if_folder",
+        "visible": false,
+        "sortable": false,
+        "searchable": false
+      },
+      { "data": "name"
+        // "className": "columnAslinkTo",
+        // render: function ( data, type, row, meta ) {
+        //   // return '<a href="'+data+'">Download</a>';
+        //   console.log(row.name_if_folder);
+        //   return data; }
+      },
+      { "data": "note" }, 
+      { "data": "author" }, 
+      { "data": "updated_at",
+        "width": "130px" }, 
+      { "data": "file_size",
+        "searchable": false,
+        "sortable": false,
+        "width": "100px" },
+      { "data": "action",
+        "searchable": false,
+        "sortable": false,
+        "width": '100px',
+        className: 'datatable-action-column' }
+    ],
+//    columnDefs: [ { orderable: false, targets: [ 0,1,2 ] } ],
+    preDrawCallback: function( settings ) {
+      // jezeli panel nie jest widoczny, to przerwij ładowanie danych
+      if ( $( "#tab_components" ).is( ":hidden" ) ) {
+        return false;
+      }
+    },
+    createdRow: function ( row, data, dataIndex, cells ) {
+      $(row).attr('id', 'row-' + dataIndex);
+      $(row).attr('draggable', 'true');
+    },
+    drawCallback: function () {
+      // Add HTML5 draggable event listeners to each row
+      rows = document.querySelectorAll('#componentable-components tbody tr');
+        [].forEach.call(rows, function(row) {
+          row.addEventListener('dragstart', handleDragStart, false);
+          row.addEventListener('dragenter', handleDragEnter, false)
+          row.addEventListener('dragover', handleDragOver, false);
+          row.addEventListener('dragleave', handleDragLeave, false);
+          row.addEventListener('drop', handleDrop, false);
+          row.addEventListener('dragend', handleDragEnd, false);
+        });
+    },
+    order: [[ 3, "asc" ]],
+    language: {
+      url: $('#componentable-components').data('locale_url')
+    },
+    initComplete: function(settings, json) {
+      // oComponentableComponentsTable.buttons().each(function (button, index) {
+      //     console.log(button.node);
+      // });
+      oComponentableComponentsTable.button(0).node().attr( 'title', oComponentableComponentsTable.i18n( 'buttons.revertColVisColReorder' ) );
+      oComponentableComponentsTable.button(1).node().attr( 'title', oComponentableComponentsTable.i18n( 'buttons.colvis' ) );
+      oComponentableComponentsTable.button(2).node().attr( 'title', oComponentableComponentsTable.i18n( 'buttons.selectAll' ) );
+      oComponentableComponentsTable.button(3).node().attr( 'title', oComponentableComponentsTable.i18n( 'buttons.selectNone' ) );
+      oComponentableComponentsTable.button(4).node().attr( 'title', oComponentableComponentsTable.i18n( 'buttons.downloadSelected' ) );
+      oComponentableComponentsTable.button(5).node().attr( 'title', oComponentableComponentsTable.i18n( 'buttons.deleteSelected' ) );
+    },
+    stateSaveCallback: function(settings,data) {
+      localStorage.setItem( 'inwent_dt_components-table_/en-pl/archives', JSON.stringify(data) )
+    },
+    stateLoadCarchivesback: function(settings) {
+      return JSON.parse( localStorage.getItem( 'inwent_dt_components-table_/en-pl/archives' ) )
+    }
+  });
+
+  oComponentableComponentsTable
+  .on( 'draw', function () {
+    oComponentableComponentsTable.rows().deselect();
+  });
+
+
+  // jezeli nastepuje wyswietlenie tab, to zaladuj dane
+  $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
+    var target = $(e.target).attr("href") // activated tab
+    if (target == '#components') {
+      oComponentableComponentsTable.draw();
+    };
+  });
+
+
+  $('#componentable-components tbody').on( 'click', 'td.columnAslinkTo', function () {
+
+    var tr = $(this).closest('tr');
+    var row = oComponentableComponentsTable.row( tr );
+
+    alert(row.data().name);
+
+  });
+
+
+  // column 'action' delete button
+  $('#componentable-components tbody').on( 'click', 'button-as-link', function () {
+    var keepProcessing = true;
+
+    if ($(this).attr('toastr-message')) {
+      var message = $(this).attr('toastr-message');
+    };
+
+    if ( true && $(this).attr('ajax-method') == 'DELETE' ) {
+      keepProcessing = false;
+      var redrawNeeded = true;
+      if (confirm('Czy na pewno chcesz usunać?')) {
+        keepProcessing = true;
+      }
+    };
+
+    if (keepProcessing == false) {
+      return;
+    };
+
+    $.ajax({
+      url: $(this).attr('ajax-path'),
+      type: $(this).attr('ajax-method'),
+      async: true,
+      success: function (response) {
+        if (redrawNeeded == true) {
+          oComponentableComponentsTable.draw();
+        };
+        if (message) {
+          toastr['success'](message);
+        }
+      },
+      error: function (xhr, ajaxOptions, thrownError) {
+        console.log(xhr);
+        if (xhr.status == 401) {
+          window.location.reload();
+        } else {
+          getErrorMessage(xhr, thrownError);
+        }
+      }
+    });    
+
+  });
+
+
+
+
+
+// -----------------------------------------------------------------------------
+// drag and drop
+  function handleDragStart(e) {
+    // console.log("handleDragStart(e)");
+    // this / e.target is the source node.
+    
+    // Set the source row opacity
+    this.style.opacity = '0.4';
+
+    // Keep track globally of the source row and source table id
+    dragSrcRow = this;
+    srcTable = this.parentNode.parentNode.id
+
+    // Keep track globally of selected rows
+    selectedRows = $('#' + srcTable).DataTable().rows( { selected: true } );
+    selectedRowsIds = selectedRows.ids().toArray();
+   
+    // Allow moves
+    e.dataTransfer.effectAllowed = 'move';
+
+    // Save the source row html as text
+    // e.dataTransfer.setData('text/plain', e.target.outerHTML);
+    var transferObj = { srcTable: srcTable, 
+                        dragSrcRowId: $('#' + srcTable).DataTable().row(dragSrcRow).id(),
+                        srcSelectedRowIds: selectedRowsIds };
+    e.dataTransfer.setData('text/plain', JSON.stringify(transferObj));
+
+    //e.dataTransfer.setData('text/plain', JSON.stringify($('#' + srcTable).DataTable().row(dragSrcRow).data()) );
+    //e.dataTransfer.setData('text/plain', JSON.stringify(e.target) );
+  }
+  
+  function handleDragEnter(e) {
+    // console.log("handleDragEnter(e)");
+    // this / e.target is the current hover target.  
+    // console.log("e: ", e);
+    // console.log("dragSrcRow: ", dragSrcRow);
+    // console.log("e.target.parentNode: ", e.target.parentNode);
+    
+    // Get current table id
+    var currentTable = this.parentNode.parentNode.id  
+
+    if (e.target.parentNode.id) {
+      // console.log("-----------(e.target.parentNode.id) TRUE ...............");
+      var overRow = e.target.parentNode;
+      // console.log(overRow);
+    } else {
+      // console.log("-----------(e.target.parentNode.id) FALSE ...............");
+      var overRow = this;
+      // console.log(overRow);
+    }
+
+    // console.log("-----------dragSrcRow ...............");
+    // console.log(dragSrcRow);
+    // console.log("-----------overRow ...............");
+    // console.log(overRow);
+
+    // Don't show drop zone if in source table
+  //  if (currentTable !== srcTable) {
+    if ( (overRow.id != dragSrcRow.id) && ($('#' + currentTable).DataTable().row(this).data().name_if_folder) ) {
+        // console.log("-----------dodałem clasę 'over' ...............");
+        this.classList.add('over');
+    } else {
+      e.dataTransfer.dropEffect = 'none'; 
+    }
+
+  //  }
+  };
+
+  function handleDragOver(e) {
+    //console.log("handleDragOver(e)");
+    //console.log("----Jestem nad celem upuszczania");
+
+    // console.log("---------e.dataTransfer.getData('Data'): ----------------");
+    // console.log(e.dataTransfer.getData('Data'));
+
+
+
+    // console.log("---------JSON.parse(e.dataTransfer.getData('Data')): ----------------");
+    // console.log(JSON.parse(e.dataTransfer.getData('Data')));
+
+    // console.log("---------$('#' + currentTable).DataTable().row(JSON.parse(e.dataTransfer.getData('Data'))): ----------------");
+    // console.log($('#' + srcTable).DataTable().row(JSON.parse(e.dataTransfer.getData('Data'))) );
+
+    // console.log("---------e.target.parentNode: ----------------");
+    // console.log(e.target.parentNode);
+
+
+    // console.log("---------e.target.parentNode.id: ----------------");
+    // console.log(e.target.parentNode.id);
+
+    if (e.target.parentNode.id) {
+      var overRow = e.target.parentNode;
+    } else {
+      var overRow = e.target.parentNode.parentNode;
+    }
+
+    // console.log("---------dragSrcRow: ----------------");
+    // console.log(dragSrcRow);
+
+    // console.log("---------dragSrcRow.id: ----------------");
+    // console.log(dragSrcRow.id);
+    // console.log("---------overRow.id: ----------------");
+    // console.log(overRow.id);
+
+    if (e.preventDefault) {
+      e.preventDefault(); // Necessary. Allows us to drop.
+    }
+
+    if (dragSrcRow.id == overRow.id) {
+      // console.log("dragSrcRow.id == overRow.id is TRUE");
+      e.dataTransfer.dropEffect = 'none'; 
+      return false;
+    } else {
+      e.dataTransfer.dropEffect = 'move'; 
+      // console.log("dragSrcRow.id == overRow.id is FALSE");
+      return true;
+    }
+  };
+
+  function handleDragLeave(e) {
+    // this / e.target is previous target element.
+    // Remove the drop zone when leaving element
+    //console.log("----Jestem poza celem upuszczania");
+    this.classList.remove('over');  
+  };
+  
+  function handleDrop(e) {
+    // console.log("handleDrop(e)");
+    // this / e.target is current target element.
+
+    // BJ
+    if (e.preventDefault) {
+      e.preventDefault(); // Necessary. Allows us to drop.
+    }
+
+    if (e.stopPropagation) {
+      e.stopPropagation(); // stops the browser from redirecting.
+    }
+
+    // Get destination table id, row
+    var dstTable = $(this.closest('table')).attr('id');
+    // dstTable  = componentable-components
+
+    // // No need to process if src and dst table are the same
+     if ( $('#' + dstTable).DataTable().row(this).data().name_if_folder ) {
+    // if (srcTable !== dstTable) {
+      
+      var parentId = $('#' + dstTable).DataTable().row(this).data().id;
+      var children = [];
+
+      // If selected rows and dragged item is selected then move selected rows
+      if (selectedRows.count() > 0 && $(dragSrcRow).hasClass('selected')) {
+        // console.log("(selectedRows.count() > 0 && $(dragSrcRow).hasClass('selected')) = TRUE");
+
+        children = $('#' + dstTable).DataTable().rows( { selected: true } ).ids().toArray();
+        
+      } else {  // Otherwise move dragged row
+
+        children.push($('#' + srcTable).DataTable().row(dragSrcRow).data().id);
+
+      };
+
+      // protect from overlaping
+      var index = children.indexOf(parentId);
+      if (index !== -1) children.splice(index, 1);
+
+      $.ajax({
+        url: '/' + $('#componentable-components').data('locale') + '/components/move_to_parent',
+        type: 'PATCH',
+        async: true,
+        data: {
+          parent_id: parentId,
+          children_ids: children
+        },
+        success: function (response) {
+          // oComponentableComponentsTable.draw();
+          // To powyzej jest OK, ale ponizej bardziej uniwersalne
+          $('#' + dstTable).DataTable().draw();
+          // toastr['success']('wiersz(-e) został(-y) pomyślnie przeniesiony(-e)');
+        },
+        error: function (xhr, ajaxOptions, thrownError) {
+          console.log(xhr);
+          if (xhr.status == 401) {
+            window.location.reload();
+          } else {
+            getErrorMessage(xhr, thrownError);
+          }
+        }
+      });
+
+    }
+    return false;
+  };
+
+  function handleDragEnd(e) {
+    // console.log("handleDragEnd(e)");
+    // this/e.target is the source node.
+    
+    // Reset the opacity of the source row
+    this.style.opacity = '1.0';
+
+    // Clear 'over' class from both tables
+    // and reset opacity
+    [].forEach.call(rows, function (row) {
+      row.classList.remove('over');
+      row.style.opacity = '1.0';
+    });
+
+  };
+
+});

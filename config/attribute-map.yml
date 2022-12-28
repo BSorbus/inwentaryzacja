@@ -1,0 +1,75 @@
+# "urn:oid:0.9.2342.19200300.100.1.3": "email"
+# "urn:oid:2.5.4.3": "name"
+# "urn:mace:dir:attribute-def:mail": "email"
+# "urn:mace:dir:attribute-def:givenName": "first_name"
+# "urn:mace:dir:attribute-def:sn": "last_name"
+# "urn:mace:dir:attribute-def:uid": "username"
+#urn:oasis:names:tc:SAML:2.0:attrname-format:basic
+
+#    create_table :users do |t|
+#      t.string :wso2is_userid
+#      t.string :email, null: false
+#      t.string :first_name
+#      t.string :last_name
+#      t.string :user_name
+#      t.date :birth_date
+#      t.string :birth_city
+#      t.string :pesel
+#      t.string :passport
+#      t.string :phone
+#      t.date :csu_confirmed_at
+#      t.string :csu_confirmed_by
+
+"userid": "wso2is_userid"
+"emailaddress": "email"
+"givenname": "first_name"
+"lastname": "last_name"
+"username": "user_name"
+"extconfirmed": "csu_confirmed"
+"extconfirmedat": "csu_confirmed_at"
+"extconfirmedby": "csu_confirmed_by"
+
+# Email         http://wso2.org/claims/emailaddress
+# "urn:mace:dir:attribute-def:mail": "email"
+#"http://wso2.org/claims/emailaddress": "email"
+
+# First Name    http://wso2.org/claims/givenname
+# "urn:mace:dir:attribute-def:givenName": "first_name"
+#"givenname": "email"
+
+# Last Name     http://wso2.org/claims/lastname
+# "urn:mace:dir:attribute-def:sn": "last_name"
+#"sn": "last_name"
+
+# username      http://wso2.org/claims/username
+# "urn:mace:dir:attribute-def:uid": "username"
+#"uid": "username"
+
+# givenName
+#"urn:oid:2.5.4.42": "profile_name"
+
+# "urn:mace:dir:attribute-def:uid": “login”
+# "urn:mace:dir:attribute-def:email": "email"
+# "urn:mace:dir:attribute-def:name": "name"
+# "urn:mace:dir:attribute-def:givenName": "given_name"
+
+# "emailaddress": "email"
+# "urn:oasis:names:tc:SAML:1.1:nameid-format:country": "profile_name"
+#"country": "profile_name"
+#
+# <saml2:Subject>
+#     <saml2:NameID Format="urn:oasis:names:tc:SAML:1.1:nameid-format:emailAddress">ruby-profile-name@email.com</saml2:NameID>
+#     <saml2:SubjectConfirmation Method="urn:oasis:names:tc:SAML:2.0:cm:bearer"><saml2:SubjectConfirmationData InResponseTo="_6cf1d12b-6337-4a28-b75a-c78192120b12"
+#         NotOnOrAfter="2019-04-19T08:29:39.280Z" Recipient="http://localhost:3000/users/saml/auth"/></saml2:SubjectConfirmation>
+# </saml2:Subject>
+
+# <saml2:AttributeStatement>
+#     <saml2:Attribute Name="http://wso2.org/claims/username"
+#         NameFormat="urn:oasis:names:tc:SAML:2.0:attrname-format:basic">
+#         <saml2:AttributeValue xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xs:string">ruby_profile_name</saml2:AttributeValue>
+#     </saml2:Attribute>
+#     <saml2:Attribute Name="http://wso2.org/claims/emailaddress"
+#         NameFormat="urn:oasis:names:tc:SAML:2.0:attrname-format:basic">
+#         <saml2:AttributeValue xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xs:string">ruby-profile-name@email.com</saml2:AttributeValue>
+#     </saml2:Attribute>
+# </saml2:AttributeStatement>

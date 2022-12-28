@@ -1,0 +1,167 @@
+<div class="row">
+  <div class="col-sm-4">
+
+    <!-- move from _download_simple_users -->
+    <% if access %>
+      <%= link_to send_link_to_component_download_simple_component_path(@component.id, users_ids: @component.componentable.accesses_users.ids.uniq ),
+                          method: :post,
+                          remote: true,
+                          data: { confirm: t('helpers.links.confirm_send_mail_for_download', data: t('to_all')) }, 
+                          class: "pull-left btn btn-sm btn-info" do %>
+        <span><%= send_email_with_share_to_all_legend %></span>
+      <% end %>
+    <% end %>    
+
+  </div>
+
+  <div class="col-sm-8">
+
+    <%= form_for User.new, url: send_link_to_component_download_simple_component_path(@component), method: :post, remote: true do |f| %>
+
+
+      <div class="form-group required">
+        <%= f.hidden_field :id, 
+                          class: "form-control input-sm select2user", 
+                          placeholder: t('placeholder.select2user'),
+                          style: "width:100%",
+                          "data-locale": "#{params[:locale]}" %>
+      </div>
+
+      <%= f.button(:class => "btn btn-sm btn-primary pull-right", disabled: false) do %>
+        <span><%= send_email_with_share_legend %></span>
+      <% end %>
+
+
+    <% end %>
+
+
+  </div>
+</div>
+
+
+<script>
+
+  function userAddJsActionExternal(that) {
+    // console.log('userAddJsActionExternal -> that', that);
+    var select2ObjContextId = $(that).attr('data-select2-context-id');
+    //remove spaces
+    var emailForAdd = $(that).attr('data-term').replace(/\s+/g, '');
+    //check valid email
+    if (validateEmail(emailForAdd)) { 
+      if (confirm( emailForAdd + "<%= t('helpers.links.confirm_add_user') %>") ) {
+
+        $.ajax({
+          url: '/<%= locale %>/users.json',
+          type: 'POST',
+          data: {
+            user: {"email": emailForAdd}
+          },
+          success: function (response) {
+            $("#"+select2ObjContextId).select2("val", response.id).trigger("change"); 
+            toastr['success'](response.fullname + "<%= t('success.messages.make_user_in_select2') %>");
+          },
+          error: function (xhr, ajaxOptions, thrownError) {
+            console.log(xhr);
+            if (xhr.status == 401) {
+              window.location.reload();
+            } else {
+              getErrorMessage(xhr, thrownError);
+            }
+          }
+        }); 
+        //end $.ajax
+
+      }
+    } else {
+      // toastr['error']("<%= t('errors.messages.bad_email') %>");
+      alert( "<%= t('errors.messages.bad_email') %>" );
+    };
+
+    return false;
+  };
+
+  function initUserSelection(element, callback) {
+    var id=$(element).val();
+    if (id!=="") {
+      $.get( "/<%= locale %>/users/"+id+".json", function(data_from_json) {
+        if(data_from_json)
+          // callback({ id: data_from_json.id, text: data_from_json.fullname });
+        return callback({ data_obj: data_from_json, id: data_from_json.id });
+      });
+    }
+  };
+
+  function formatUserSelection(item, container) {
+    // console.log("formatUserSelection -> container", container);
+    // console.log("formatUserSelection -> container.context", container.context);
+    if (item.id) {
+      var userName = item.data_obj.fullname;
+      return  "<span>" + userName + "</span>";
+    } else {
+      return "";
+    }
+  };
+
+  function formatUserResult(item, container, query, escapeMarkup) {
+    if (item.id) {
+      var userName = item.data_obj.fullname;
+      return  "<span>" + userName + "</span>";          
+    } else {
+      return "";
+    }
+  };
+
+  $('.select2user').select2({
+    minimumInputLength: 0,
+    maximumInputLength: 75,
+    allowClear: false,
+    ajax: {
+      url: "/<%= locale %>/users/select2_index.json",
+      dataType: 'json',
+      quietMillis: 250,
+      type: 'GET',
+      data: function(term, page) {
+        // console.log( "2.", $("#"+document.activeElement.id ).val() );
+        return {
+          q: term,
+          page_limit: 10,
+          page: page
+        };
+      },
+      results: function(data, page) {
+        //var more = (page * 10) < data.total_count;
+        var more = (page * 10) < data.meta.total_count;
+        var users = $.map(data.users, function(user, i) {
+          // return { id: user.id, text: user.fullname };
+          return { data_obj: user, id: user.id};
+        });
+        return { results: users, more: more };
+      }
+    },
+    formatAjaxError: function(jqXHR, textStatus, errorThrown) {
+      console.log(jqXHR);
+      if (jqXHR.status == 401) {
+        window.location.reload();
+      } else {
+        getErrorMessage(jqXHR, jqXHR.status);
+      }
+      return errorThrown + " " + jqXHR.responseText;
+    },
+    formatNoMatches: function(term) {
+      // console.log("formatNoMatches -> this", this);
+      // console.log("formatNoMatches -> this.context.id", this.context.id);
+      var select2ObjContextId = this.context.id;
+
+      return "<%= t('help_block_text.select2_no_results') %><span class='pull-right'><a href='#' onclick='return userAddJsActionExternal(this, document.activeElement.id );' data-term='" + term.toLowerCase() + "' data-select2-context-id='" + select2ObjContextId + "'><button type='button' class='btn btn-xs btn-primary'><%= t('helpers.links.want_create') %></button></a></span>";
+
+    },
+    initSelection: initUserSelection, 
+    formatSelection: formatUserSelection, // format selected row
+    formatResult: formatUserResult, // format rows on list
+    dropdownCssClass: "bigdrop", // apply css that makes the dropdown taller
+    escapeMarkup: function (m) { return m; } // we do not want to escape markup since we are displaying html in results
+  });
+
+</script>
+
+

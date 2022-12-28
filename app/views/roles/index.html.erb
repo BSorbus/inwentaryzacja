@@ -1,0 +1,41 @@
+<div class="grid-container">
+
+  <div class="sidebar">
+    <%= render 'sidebar_index' %>
+  </div>
+
+  <div class="main-content">
+    <div class="container-fluid">
+
+      <div class="row">
+        <div class="col-sm-12">
+          <h3 class="center colored-title index-title"><%= role_index_legend %></h3>
+        </div> <!--/col-sm-12 -->
+      </div> <!--/row -->
+
+      <div class="row">
+        <div class="col-sm-12">
+          <table id="roles-table" class="hover cell-border" cellspacing="0" width="100%" 
+            data-source="<%= datatables_index_roles_path(format: :json) %>"
+            data-locale_url="<%= datatables_lang_path(format: :json) %>">
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th><%= Role.human_attribute_name(:name) %></th>
+                <th><%= Role.human_attribute_name(:note) %></th>
+                <th><%= Role.human_attribute_name(:activities) %></th>
+              </tr>
+            </thead>
+            <tbody>
+              <!-- data from ajax -->
+            </tbody>
+          </table>
+          </table>
+        </div> <!--/col-sm-12 -->
+      </div> <!--/row -->
+
+    </div> <!--/container-fluid--> 
+  </div> <!--/main-content--> 
+
+</div> <!--/grid-containe--> 
+

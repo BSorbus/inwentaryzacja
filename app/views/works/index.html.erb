@@ -1,0 +1,34 @@
+<div class="container">
+  <div class="row">
+    <div class="col-sm-12">
+      <h3 class="center colored-title index-title"><%= work_index_legend %></h3>
+    </div> <!--/col-sm-12 -->
+  </div> <!--/row -->
+</div> <!--/container -->
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-sm-12">
+      <table id="works-table" class="hover cell-border" cellspacing="0" width="100%" 
+        data-source="<%= datatables_index_works_path(format: :json) %>",
+        data-locale_url="<%= datatables_lang_path(format: :json) %>">
+        <thead>
+          <tr>
+            <th>0 ID </th>
+            <th class="col-sm-1"><%= Work.human_attribute_name(:created_at) %></th>
+            <th class="col-sm-1"><%= Work.human_attribute_name(:created_by) %></th>
+            <th class="col-sm-1"><%= Work.human_attribute_name(:action) %></th>
+            <th class="col-sm-1"><%= Work.human_attribute_name(:trackable_type) %></th>
+            <th class="col-sm-2"><%= Work.human_attribute_name(:trackable_id) %></th>
+            <th class="col-sm-6"><%= Work.human_attribute_name(:parameters) %></th>
+          </tr>
+        </thead>
+
+        <tbody>
+           <!--data from JSON -->
+        </tbody>
+      </table>
+    </div> <!--/col-sm-12 -->
+  </div> <!--/row -->
+</div> <!--/container -->
+

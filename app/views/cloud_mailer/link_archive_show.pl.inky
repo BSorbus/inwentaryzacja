@@ -1,0 +1,79 @@
+<spacer size="16"></spacer>
+<container>
+
+  <row class="collapsed">
+    <columns small="2">
+      <spacer size="16"></spacer>
+      <center>
+        <%=link_to( image_tag( attachments['logo_mailer'].url, alt: "LOGO" ), root_url(locale), target: "_blank" ) %>
+      </center>
+    </columns>
+    <columns small="10">
+      <spacer size="16"></spacer>
+        <h5 class="h5-small text-right"><%= "#{@recipient.try(:email)}" %></h5>
+    </columns>
+  </row>
+
+  <spacer size="16"></spacer>
+
+
+  <row>
+    <columns>
+      <p>W programie <strong>UKE Inwentaryzacja</strong> została Ci udostępniona składnica plików</p>
+      <p><%= link_to @archive_fullname, @archive_url_uuid, target: "_blank" %></p> 
+
+      <% unless @archive_note.blank? %>
+        <spacer size="8"></spacer>
+        <h4 class="h4-small">Opis i uwagi:<br> <%= @archive_note %></h4> 
+      <% end %>
+
+      <spacer size="8"></spacer>
+      <h4 class="h4-small">Dostęp wygasa: <%= @archive.expiry_on %></h4> 
+    </columns>
+  </row>
+
+
+  <row>
+    <columns>
+      <callout class="primary">
+        <h5 class="h5-small">Uwaga!</h5> 
+
+        <h5 class="h5-small">Dostęp wymaga autoryzacji w Centralnym Systemie Uwierzytelniania UKE (CSU UKE).</h5> 
+
+        <h5 class="h5-small">Jeżeli nie posiadasz konta w CSU UKE kliknij w link powyżej a zostaniesz automatycznie przekierowany do właściwej strony. Pamiętaj, że Twój <strong>adres e-mail</strong>, na który otrzymałeś tę wiadomość, <strong>musi być zgodny</strong> z Twoim adresem e-mail konta w CSU UKE. Jeżeli logujesz się wykorzystując Profil Zaufany (PZ), to adres e-mail zapisany w PZ musi być zgodny.</h5> 
+
+        <h5 class="h5-small">Kliknij w link powyżej jeżeli chcesz przejść do składnicy.</h5> 
+
+      </callout>
+    </columns>
+  </row>
+
+
+  <spacer size="16"></spacer>
+
+  <row class="collapsed footer">
+    <columns>
+      <hr class="hr-brand">
+      <row>
+        <columns small="4">
+          <spacer size="8"></spacer>
+          <center>
+            <%= image_tag( attachments['logo_uke'].url, alt: "LOGO UKE" ) %>
+          </center>
+        </columns>
+        <columns small="8">
+          <spacer size="8"></spacer>
+          <h6 class="text-right h6-small"><%= mail_to "cloud@uke.gov.pl" %></h6>
+        </columns>
+      </row>
+      <row>
+        <columns small="12>
+          <h6 class="text-left h6-small"><small></small></h6>
+          <h6 class="text-left h6-small"><small>&copy; 2020 UKE-BI,  Wysłano z programu <%= Rails.application.secrets.domain_name %></small></h6>
+        </columns>
+      </row>
+    </columns>
+  </row>
+
+</container>
+<spacer size="16"></spacer>

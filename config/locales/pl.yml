@@ -1,0 +1,572 @@
+pl:
+  "true": "Tak"
+  "false": "Nie"
+  to_all: 'wszystkich'
+  no_data: 'Brak danych'
+  logo_file: "logo_uke_pl_do_lewej.png"
+  logo_link: "http://www.uke.gov.pl"
+  title: "UKE Inwentaryzacja"
+  description: "UKE Inwentaryzacja umożliwia pobieranie plików ze składnicy UKE"
+  layouts:
+    footer:
+      brand: 'Urząd Komunikacji Elektronicznej'
+      brand_address_1: 'ul. Giełdowa 7/9'
+      brand_address_2: '01-211 Warszawa'
+      brand_note: 'Regulator rynku telekomunikacyjnego i pocztowego'
+      contact: 'Kontakt'
+      contact_mail: 'bi@uke.gov.pl'
+      contact_phone: '+48 22 53 49 186'
+      contact_fax: '+48 22 53 49 267'
+      links: 'Zobacz też'
+  static_pages:
+    home:
+      title: 'UKE Inwentaryzacja'
+      slide_0: 'Dostęp do dokumentów może być prosty.'
+      slide_1: 'Wystarczy jedno kliknięcie...'
+      slide_2: '...aby zobaczyć cały świat'
+    declaration:
+      title: 'Deklaracja dostępności'
+      navbar: 'Deklaracja dostępności'
+  management: 'Zarządzanie'
+  data: 'Dane'
+  table_action: 'Akcja'
+  table_role_granted: 'Przyznane?'
+  table_group_member: 'Jest członkiem?'
+  table_group_archivization: 'Uprawnienia'
+  last_updated: 'Ostatnia aktualizacja'
+  sidebar: 'Menu boczne'
+  file_upload:
+    in_progress: 'Pobrano:'
+    wait_to_save: 'Trwa zapisywanie danych...'
+  archives:
+    sidebar_index:
+      new: 'Dodaj nową Składnicę'
+    sidebar_new:
+      index: 'Składnice'
+      help: 'Pomoc'
+    sidebar_edit:
+      index: 'Składnice'
+      help: 'Pomoc'
+    sidebar_show:
+      index: 'Składnice'
+    index:
+      title: 'Składnice'
+    show:
+      title: 'Składnica'
+    new:
+      title: 'Nowa Składnica'
+    edit:
+      title: 'Edycja -> Składnica'
+    fieldset:
+      archivizations_title: 'Uprawnienia Grup'
+  components:
+    components_tab:
+      folder_submit: 'Utwórz'
+    index:
+      title: 'Pliki'
+    edit:
+      title: 'Edycja'
+  groups:
+    sidebar_index:
+      new: 'Dodaj nową Grupę'
+    sidebar_new:
+      index: 'Grupy'
+    sidebar_edit:
+      index: 'Grupy'
+    sidebar_show:
+      index: 'Grupy'
+    index:
+      title: 'Grupy'
+    show:
+      title: 'Grupa'
+    new:
+      title: 'Nowa Grupa'
+    edit:
+      title: 'Edycja -> Grupa'
+    fieldset:
+      members_title: 'Członkowie:'
+  roles:
+    sidebar_index:
+      new: 'Dodaj nową Rolę'
+    sidebar_new:
+      index: 'Role'
+    sidebar_edit:
+      index: 'Role'
+    sidebar_show:
+      index: 'Role'
+    index:
+      title: 'Role'
+    show:
+      title: 'Rola'
+    new:
+      title: 'Nowa Rola'
+    edit:
+      title: 'Edycja -> Rola'
+  users:
+    sidebar_index:
+      new: 'Dodaj nowego Użytkownika'
+    sidebar_new:
+      index: 'Użytkownicy'
+    sidebar_edit:
+      index: 'Użytkownicy'
+    sidebar_show:
+      index: 'Użytkownicy'
+    index:
+      title: 'Użytkownicy'
+    show:
+      title: 'Użytkownik'
+    new:
+      title: 'Nowy Użytkownik'
+    edit:
+      title: 'Edycja -> Użytkownik'
+  works:
+    index:
+      title: 'Dziennik operacji'
+  activerecord:
+    models:
+      work: 'Dziennik operacji'
+      user: 'Użytkownik'
+      role: 'Rola'
+      group: 'Grupa'
+      archive: 'Składnica'
+      component: 'Załącznik'
+    attributes:
+      work:
+        created_at: 'Data'
+        created_by: 'Autor'
+        action: 'Operacja'
+        trackable_type: 'Obiekt'
+        trackable_id: 'Identyfikator'
+        parameters: 'Dane'
+      user:
+        wso2is_userid: 'WSO2IS userid'
+        email: 'Email'
+        first_name: 'Imię'
+        last_name: 'Nazwisko'
+        user_name: 'WSO2IS username'
+        csu_confirmed: 'Konto potwierdzone?'
+        csu_confirmed_at: 'Data potwierdzenia'
+        csu_confirmed_by: 'Potwierdzone przez'
+        sign_in_count: 'Ilość logowań'
+        current_sign_in_at: 'Aktualnie zalogowany'
+        last_sign_in_at: 'Ostatnio zalogowany'
+        current_sign_in_ip: 'Aktualnie zalogowany - IP'
+        last_sign_in_ip: 'Ostatnio zalogowany - IP'
+        note: 'Opis i uwagi'
+        fullname: 'Nazwa'
+      role:
+        name: 'Nazwa'
+        activities: 'Uprawnienia'
+        note: 'Opis i uwagi'
+      group:
+        name: 'Nazwa'
+        note: 'Opis i uwagi'
+      group/members:
+        user_id: 'Użytkownik'
+        group_id: 'Grupa'
+        user: 'Użytkownik'
+        group: 'Grupa'
+      archive:
+        name: 'Nazwa'
+        expiry_on: 'Dostęp wygasa'
+        note: 'Opis przeznaczenia, uwagi'
+        folders_count: 'Ilość folderów'
+        files_count: 'Ilość plików'
+        files_size_sum: 'Suma'
+        author_id: 'Autor'
+        author: 'Autor'
+        archivizations: 'Uprawnienia Grup'
+        quota: 'Maksymalna wielkość wszystkich plików'
+      archivization:
+        archive_id: 'Składnica'
+        group_id: 'Grupa'
+        archivization_type_id: 'Uprawnienia'
+        archive: 'Składnica'
+        group: 'Grupa'
+        archivization_type: 'Uprawnienia'
+      archive/archivizations:
+        archive_id: 'Składnica'
+        group_id: 'Grupa'
+        archivization_type_id: 'Uprawnienia'
+        archive: 'Składnica'
+        group: 'Grupa'
+        archivization_type: 'Uprawnienia'
+      component:
+        componentable: 'Załączony do'
+        component_file: 'Plik/Katalog'
+        component_file_identifier: 'Plik'
+        file_content_type: 'Typ'
+        file_size: 'Rozmiar'
+        file_size_or_badge: 'Info'
+        created_at: 'Utworzony'
+        updated_at: 'Aktualizacja'
+        author_id: 'Autor'
+        author: 'Autor'
+        note: 'Opis i uwagi'
+        name_if_folder: 'Katalog'
+        name: 'Nazwa'
+        sum_file_size: 'Maksymalna wielkość wszystkich plików'
+        link_to_download: 'Link do pobrania pliku'
+        link_to_download_simple: 'Link do pobrania pliku bez autoryzacji (nie wymaga logowania do CSU!)'
+    errors:
+      models:
+        component:
+          attributes:
+            name:
+              taken: "'%{value}' już istnieje"
+      #   member:
+      #     attributes:
+      #       user_id:
+      #         taken: użytkownik %{model} %{attribute} %{value} jest już przypisany do tej grupy
+      messages:
+        file_size_is_in: 'rozmiar pliku musi być pomiędzy %{min} a %{max}'
+        file_size_is_less_than: 'rozmiar pliku musi być mniejszy od %{count}'
+        file_size_is_less_than_or_equal_to: 'rozmiar pliku musi być mniejszy lub równy %{count}'
+        file_size_is_greater_than: 'rozmiar pliku musi być większy od %{count}'
+        file_size_is_greater_than_or_equal_to: 'rozmiar pliku musi być większy lub równy %{count}'
+        allowed_file_content_types: 'plik powinien być jednym z %{types}'
+        excluded_file_content_types: 'plik nie może być typu %{types}'
+        record_invalid: "Validation failed: %{errors}"
+        restrict_dependent_destroy:
+          has_one: "Cannot delete record because a dependent %{record} exists"
+          has_many: "Cannot delete record because dependent %{record} exist"
+        created: "Wystąpił błąd w czasie dodawania nowego wpisu."
+        updated: 'Wystąpił błąd w czasie aktualizowania wpisu "%{data}".'
+        destroyed: 'Wystąpił błąd w czasie usuwania wpisu "%{data}".'
+        account_off: 'Wystąpił błąd w czasie wyłączania konta "%{data}".'
+        account_on: 'Wystąpił błąd w czasie włączania konta "%{data}".'
+        required: 'nie może być puste'
+        group_taken: '"%{group_name}" z uprawnieniami "%{archivization_type}" jest już przypisana.'
+        user_taken: '"%{user_name}" jest już przypisany.'
+    successfull:
+      messages:
+        created: 'Wpis: "%{data}" został pomyślnie utworzony.'
+        updated: 'Wpis: "%{data}" został pomyślnie zaktualizowany.'
+        destroyed: 'Wpis: "%{data}" został pomyślnie usunięty.'
+        add_role: 'Użytkownikowi "%{parent}" pomyślnie dodano rolę "%{child}".'
+        remove_role: 'Użytkownikowi "%{parent}" została pomyślnie usunięta rola "%{child}".'
+        account_off: 'Pomyślnie wyłączono konto "%{data}".'
+        account_on: 'Pomyślnie włączono konto "%{data}".'
+        moved: 'Został(-y) pomyślnie przeniesiony(-e)'
+        downloaded: '"%{data}" został pomyślnie pobrany.'
+  pundit:
+    default: ' BRAK UPRAWNIEŃ: Nie można wykonać tej czynności!'
+    work_policy:
+      index?: ' BRAK UPRAWNIEŃ: Nie możesz wyświetlać listy działań!'
+    role_policy:
+      index?: ' BRAK UPRAWNIEŃ: Nie możesz wyświetlać listy ról!'
+      show?: ' BRAK UPRAWNIEŃ: Nie możesz oglądać szczegółów roli!'
+      update?: ' BRAK UPRAWNIEŃ: Nie możesz edytować danych roli!'
+      create?: ' BRAK UPRAWNIEŃ: Nie możesz tworzyć ról!'
+      destroy?: ' BRAK UPRAWNIEŃ: Nie możesz usuwać ról!'
+      add_remove_role_user?: ' BRAK UPRAWNIEŃ: Nie możesz do ról dowawać ani usuwać użytkowników!'
+    user_policy:
+      index?: ' BRAK UPRAWNIEŃ: Nie możesz wyświetlać listy użytkowników!'
+      show?: ' BRAK UPRAWNIEŃ: Nie możesz oglądać szczegółów użytkownika!'
+      update?: ' BRAK UPRAWNIEŃ: Nie możesz edytować danych użytkownika!'
+      create?: ' BRAK UPRAWNIEŃ: Nie możesz tworzyć użytkowników!'
+      destroy?: ' BRAK UPRAWNIEŃ: Nie możesz usuwać użytkowników!'
+      add_remove_role_user?: ' BRAK UPRAWNIEŃ: Nie możesz użytkownikom dodawać ani usuwać ról!'
+    group_policy:
+      index?: ' BRAK UPRAWNIEŃ: Nie możesz wyświetlać listy grup!'
+      show?: ' BRAK UPRAWNIEŃ: Nie możesz oglądać szczegółów grupy!'
+      update?: ' BRAK UPRAWNIEŃ: Nie możesz edytować danych grupy!'
+      create?: ' BRAK UPRAWNIEŃ: Nie możesz tworzyć grup!'
+      destroy?: ' BRAK UPRAWNIEŃ: Nie możesz usuwać grup!'
+      add_remove_group_user?: ' BRAK UPRAWNIEŃ: Nie możesz do grup dowawać ani usuwać użytkowników!'
+  date:
+    abbr_day_names:
+    - nie
+    - pon
+    - wto
+    - śro
+    - czw
+    - pią
+    - sob
+    abbr_month_names:
+    -
+    - sty
+    - lut
+    - mar
+    - kwi
+    - maj
+    - cze
+    - lip
+    - sie
+    - wrz
+    - paź
+    - lis
+    - gru
+    day_names:
+    - niedziela
+    - poniedziałek
+    - wtorek
+    - środa
+    - czwartek
+    - piątek
+    - sobota
+    formats:
+      default: "%d-%m-%Y"
+      long: "%B %d, %Y"
+      short: "%d %b"
+    month_names:
+    -
+    - styczeń
+    - luty
+    - marzec
+    - kwiecień
+    - maj
+    - czerwiec
+    - lipiec
+    - sierpień
+    - wrzesień
+    - październik
+    - listopad
+    - grudzień
+    order:
+    - :day
+    - :month
+    - :year
+  datetime:
+    distance_in_words:
+      about_x_hours:
+        few: około %{count} godziny
+        many: około %{count} godzin
+        one: około godziny
+        other: około %{count} godzin
+      about_x_months:
+        few: około %{count} miesiące
+        many: około %{count} miesięcy
+        one: około miesiąca
+        other: około %{count} miesięcy
+      about_x_years:
+        few: około %{count} lata
+        many: około %{count} lat
+        one: około rok
+        other: około %{count} lat
+      almost_x_years:
+        few: prawie %{count} lata
+        many: prawie %{count} lat
+        one: prawie rok
+        other: prawie %{count} lat
+      half_a_minute: pół minuty
+      less_than_x_minutes:
+        few: mniej niż %{count} minuty
+        many: mniej niż %{count} minut
+        one: mniej niż minutę
+        other: mniej niż %{count} minut
+      less_than_x_seconds:
+        few: mniej niż %{count} sekundy
+        many: mniej niż %{count} sekund
+        one: mniej niż sekundę
+        other: mniej niż %{count} sekund
+      over_x_years:
+        few: ponad %{count} lata
+        many: ponad %{count} lat
+        one: ponad rok
+        other: ponad %{count} lat
+      x_days:
+        few: "%{count} dni"
+        many: "%{count} dni"
+        one: 1 dzień
+        other: "%{count} dni"
+      x_minutes:
+        few: "%{count} minuty"
+        many: "%{count} minut"
+        one: 1 minuta
+        other: "%{count} minut"
+      x_months:
+        few: "%{count} miesiące"
+        many: "%{count} miesięcy"
+        one: 1 miesiąc
+        other: "%{count} miesięcy"
+      x_seconds:
+        few: "%{count} sekundy"
+        many: "%{count} sekund"
+        one: 1 sekunda
+        other: "%{count} sekund"
+    prompts:
+      day: Dzień
+      hour: Godzina
+      minute: Minuta
+      month: Miesiąc
+      second: Sekundy
+      year: Rok
+  help_block_text:
+    select2_item: 'Wprowadź nazwę miejscowości i ewentualnie ulicy. Możesz ograniczyć listę podając nazwę gminy i/lub powiatu i/lub województwa. Wyrazy oddzielaj spacją. Np. osielsko grzybo kujaw'
+    select2_no_results: Brak danych
+  success:
+    messages:
+      email_has_been_sent: 'Email został wysłany'
+      make_user_in_select2: ' został pomyślnie utworzony.'
+      wait_zip_created: 'Czekaj, trwa tworzenie pliku .ZIP'
+  errors:
+    format: "%{attribute} - %{message}"
+    messages:
+      accepted: musi zostać zaakceptowane
+      blank: nie może być puste
+      confirmation: nie zgadza się z polem %{attribute}
+      empty: nie może być puste
+      equal_to: musi być równe %{count}
+      even: musi być parzyste
+      exclusion: jest zarezerwowane
+      greater_than: musi być większe od %{count}
+      greater_than_or_equal_to: musi być większe lub równe %{count}
+      inclusion: nie znajduje się na liście dopuszczalnych wartości
+      invalid: jest nieprawidłowe
+      less_than: musi być mniejsze od %{count}
+      less_than_or_equal_to: musi być mniejsze lub równe %{count}
+      not_a_number: nie jest liczbą
+      not_an_integer: musi być liczbą całkowitą
+      odd: musi być nieparzyste
+      present: musi być puste
+      required: musi istnieć
+      taken: zostało już zajęte
+      too_long:
+        few: jest za długie (maksymalnie %{count} znaki)
+        many: jest za długie (maksymalnie %{count} znaków)
+        one: jest za długie (maksymalnie jeden znak)
+        other: jest za długie (maksymalnie %{count} znaków)
+      too_short:
+        few: jest za krótkie (przynajmniej %{count} znaki)
+        many: jest za krótkie (przynajmniej %{count} znaków)
+        one: jest za krótkie (przynajmniej jeden znak)
+        other: jest za krótkie (przynajmniej %{count} znaków)
+      wrong_length:
+        few: ma nieprawidłową długość (powinna wynosić %{count} znaki)
+        many: ma nieprawidłową długość (powinna wynosić %{count} znaków)
+        one: ma nieprawidłową długość (powinna wynosić jeden znak)
+        other: ma nieprawidłową długość (powinna wynosić %{count} znaków)
+      other_than: musi być inna niż %{count}
+      bad_email: nieprawidłowy adres e-mail
+      not_found_resource: Nie znalazłem takiego zasobu
+    template:
+      body: 'Błędy dotyczą następujących pól:'
+      header:
+        few: "%{model} nie został zachowany z powodu %{count} błędów"
+        many: "%{model} nie został zachowany z powodu %{count} błędów"
+        one: "%{model} nie został zachowany z powodu jednego błędu"
+        other: "%{model} nie został zachowany z powodu %{count} błędów"
+  helpers:
+    actions: "Akcje"
+    select:
+      prompt: Proszę wybrać
+    submit:
+      create: Utwórz obiekt %{model}
+      submit: Zapisz obiekt %{model}
+      update: Aktualizuj obiekt %{model}
+    links:
+      index: 'Lista'
+      back_to_index: 'Powrót do listy'
+      show: 'Szczegóły'
+      show_link: 'Pokaż'
+      new:  'Dodaj'
+      want_create: 'Czy utworzyć?'
+      edit: 'Edycja'
+      back: 'Powrót'
+      back_from_new_or_edit: 'Anuluj'
+      cancel: 'Wróć'
+      confirm: "Czy na pewno?"
+      confirm_destroy: 'Na pewno chcesz usunąć wpis: "%{data}"?'
+      confirm_add: 'Czy na pewno chcesz dodać ten wpis?'
+      confirm_add_user: ' - Czy na pewno chcesz dodać do bazy użytkowników ten wpis?'
+      confirm_send_mail_for_archive: 'Na pewno chcesz wysłać email o udostepnieniu składnicy do %{data}?'
+      confirm_send_mail_for_download: 'Na pewno chcesz wysłać email z linkiem do %{data}?'
+      confirm_send_mail_for_download_simple: 'Na pewno chcesz wysłać email zawierający link do pobrania pliku bez autoryzacji do %{data}?'
+      destroy: "Usuń"
+      destroy_account: "Usuń moje konto"
+      send_email: "Wyślij email"
+      send_email_to_all: "Wyślij email do wszystkich"
+      download: "Pobierz"
+      close: "Zamknij"
+      filter: "Filtruj dane"
+      link_to_add_fields_nested: '[ + Dodaj wiersz ]'
+      link_to_remove_fields_nested: '[ - Usuń wiersz ]'
+      link_to_remove_fields_nested_small: '[ - ]'
+      not_exist_in_list:  'Nie ma pozycji na liście wyboru?'
+      help:  'Pomoc'
+      copy_to_clipboard:  'Kopiuj do Schowka'
+    titles:
+      edit: "Edycja obiektu %{model}"
+      save: "Zapisz obiekt %{model}"
+      new: "Nowy obiekt %{model}"
+      delete: "Usuń obiekt %{model}"
+      change_your_password: "Zmiań swoje hasło"
+  tooltip:
+    show: 'Pokaż'
+    new: 'Dodaj'
+    edit: 'Edycja'
+    destroy: 'Usuń'
+    download: 'Pobierz'
+    send_email: 'Wyślij email'
+    add_fields_nested: 'Dodaj kolejny wiersz'
+    remove_fields_nested: 'Usuń wiersz'
+  help_block_text:
+    select2user: 'Szukanie po: Nazwa, Email. Warunki oddzielaj spacją'
+    fileuploaddragdrop: 'Wybierz plik(-i) lub przeciągnij i upuść'
+    select2_no_results: Brak wyników
+  placeholder:
+    select2user: 'Wybierz Użytkownika'
+    select2group: 'Wybierz Grupę'
+  number:
+    currency:
+      format:
+        delimiter: " "
+        format: "%n %u"
+        precision: 2
+        separator: ","
+        significant: false
+        strip_insignificant_zeros: true
+        unit: zł
+    format:
+      delimiter: " "
+      precision: 3
+      separator: ","
+      significant: false
+      strip_insignificant_zeros: false
+    human:
+      decimal_units:
+        format: "%n %u"
+        units:
+          billion: Miliard
+          million: Milion
+          quadrillion: Biliard
+          thousand: Tysiąc
+          trillion: Bilion
+          unit: ''
+      format:
+        delimiter: ''
+        precision: 3
+        significant: true
+        strip_insignificant_zeros: true
+      storage_units:
+        format: "%n %u"
+        units:
+          byte:
+            few: bajty
+            many: bajtów
+            one: bajt
+            other: bajty
+          gb: GB
+          kb: KB
+          mb: MB
+          tb: TB
+    percentage:
+      format:
+        delimiter: ''
+        format: "%n%"
+    precision:
+      format:
+        delimiter: ''
+  support:
+    array:
+      last_word_connector: " oraz "
+      two_words_connector: " i "
+      words_connector: ", "
+  time:
+    am: przed południem
+    formats:
+      default: "%a, %d %b %Y %H:%M:%S %z"
+      long: "%B %d, %Y %H:%M"
+      short: "%d %b %H:%M"
+    pm: po południu
