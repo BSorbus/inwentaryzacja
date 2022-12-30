@@ -7,16 +7,6 @@ class Archivization < ApplicationRecord
 
   has_many :users, through: :group
 
-  # validates
-  # validates :group_id, presence: true,  
-  #                     uniqueness: { scope: [:archive_id, :archivization_type_id], message: "jest już przypisana do tej Składnicy z takimi upprawnieniami" }  
-
-  # validates :group_id, presence: true,  
-  #                     uniqueness: { scope: [:archive_id, :archivization_type_id],  
-  #                                   message: ->(object, data) do
-  #                                     "'#{object.group.fullname}' z uprawnieniami '#{object.archivization_type.name}' jest już przypisana"
-  #                                   end } 
-
   validates :group_id, presence: true,  
                       uniqueness: { scope: [:archive_id, :archivization_type_id],  
                                     message: ->(object, data) do
