@@ -14,9 +14,9 @@ en:
       brand_address_2: '01-211 Warsaw'
       brand_note: 'Regulator of the telecommunications and postal market in Poland, EU'
       contact: 'Contact'
-      contact_mail: 'bi@uke.gov.pl'
-      contact_phone: '+48 22 53 49 186'
-      contact_fax: '+48 22 53 49 267'
+      contact_mail: 'sekretariat.dsa@uke.gov.pl'
+      contact_phone: '+48 22 53 49 335'
+      contact_fax: '+48 22 53 49 335'
       links: 'Links'
   static_pages:
     home:
@@ -25,8 +25,8 @@ en:
       slide_1: 'Just one click...'
       slide_2: '...to see the whole world.'
     info:
-      information_file_pdf: 'Informacje dodatkowe (instrukcja.pdf)'
-      custom_file_xlsx: 'Formularz sprawozdawczy (formularz.xlsx)'
+      information_file_pdf: 'Instrukcja, oświadczenia (instrukcja.pdf)'
+      custom_file_zip: 'Inwentaryzacja szablony (szablony_csv.zip)'
     declaration:
       title: 'Accessibility declaration'
       navbar: 'Accessibility declaration'

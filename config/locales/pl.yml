@@ -14,9 +14,9 @@ pl:
       brand_address_2: '01-211 Warszawa'
       brand_note: 'Regulator rynku telekomunikacyjnego i pocztowego'
       contact: 'Kontakt'
-      contact_mail: 'bi@uke.gov.pl'
-      contact_phone: '+48 22 53 49 186'
-      contact_fax: '+48 22 53 49 267'
+      contact_mail: 'sekretariat.dsa@uke.gov.pl'
+      contact_phone: '+48 22 53 49 335'
+      contact_fax: '+48 22 53 49 335'
       links: 'Zobacz też'
   static_pages:
     home:
@@ -25,8 +25,8 @@ pl:
       slide_1: 'Wystarczy jedno kliknięcie...'
       slide_2: '...aby zobaczyć cały świat'
     info:
-      information_file_pdf: 'Informacje dodatkowe (instrukcja.pdf)'
-      custom_file_xlsx: 'Formularz sprawozdawczy (formularz.xlsx)'
+      information_file_pdf: 'Instrukcja, oświadczenia (instrukcja.pdf)'
+      custom_file_zip: 'Inwentaryzacja szablony (szablony_csv.zip)'
     declaration:
       title: 'Deklaracja dostępności'
       navbar: 'Deklaracja dostępności'
