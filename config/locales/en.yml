@@ -24,6 +24,9 @@ en:
       slide_0: 'Access to documents can be simple.'
       slide_1: 'Just one click...'
       slide_2: '...to see the whole world.'
+    info:
+      information_file_pdf: 'Informacje dodatkowe (instrukcja.pdf)'
+      custom_file_xlsx: 'Formularz sprawozdawczy (formularz.xlsx)'
     declaration:
       title: 'Accessibility declaration'
       navbar: 'Accessibility declaration'
