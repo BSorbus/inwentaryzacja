@@ -8,6 +8,8 @@ gem 'rails', '~> 5.2.8.1'
 # Use sqlite3 as the database for Active Record
 #gem 'sqlite3'
 gem 'pg'
+# Use Puma as the app server
+gem 'puma', '~> 5.6.2'
 gem 'nokogiri', '~> 1.13.9'
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0'
@@ -34,8 +36,6 @@ gem 'bootsnap', '>= 1.1.0', require: false
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
-  # Use Puma as the app server
-  gem 'puma', '~> 5.6.2'
 end
 
 group :development do
@@ -83,7 +83,7 @@ gem 'whenever', require: false
 gem 'mina'
 gem 'mina-whenever', require: false
 
-#gem 'piwik_analytics'
+gem 'piwik_analytics'
 
 gem "devise", ">= 4.7.1"
 gem 'devise_saml_authenticatable'
