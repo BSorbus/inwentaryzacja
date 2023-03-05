@@ -13,9 +13,9 @@ class ComponentPolicy < ApplicationPolicy
       at = ArchivizationType.joins(archivizations: {archive: [], group: { members: [:user]}})
         .where(archivizations: {archive: [@model.componentable], group: {members: {user_id: [@user]}}})
         .select(:activities).distinct.map(&:activities).flatten
-      puts '########################### at ################################'
-      puts at
-      puts '########################### at ################################'
+      # puts '########################### at ################################'
+      # puts at
+      # puts '########################### at ################################'
       at
     when 'XXX'
       []
@@ -33,26 +33,26 @@ class ComponentPolicy < ApplicationPolicy
 
   def archive_send_link_to_component_download?
     # moze osobne uprawnienie?
-    puts '--------------------------------------------------'
-    puts 'ComponentPolicy: archive_send_link_to_component_download?'
-    puts 'always TRUE'
-    puts '--------------------------------------------------'
+    # puts '--------------------------------------------------'
+    # puts 'ComponentPolicy: archive_send_link_to_component_download?'
+    # puts 'always TRUE'
+    # puts '--------------------------------------------------'
     true    
   end
 
   def archive_send_link_to_component_download_simple?
     # moze osobne uprawnienie?
-    puts '--------------------------------------------------'
-    puts 'ComponentPolicy: archive_send_link_to_component_download_simple?'
-    puts 'always TRUE'
-    puts '--------------------------------------------------'
+    # puts '--------------------------------------------------'
+    # puts 'ComponentPolicy: archive_send_link_to_component_download_simple?'
+    # puts 'always TRUE'
+    # puts '--------------------------------------------------'
     true    
   end
 
   def archive_index?
-    puts '--------------------------------------------------'
-    puts 'ComponentPolicy: archive_index?'
-    puts '--------------------------------------------------'
+    # puts '--------------------------------------------------'
+    # puts 'ComponentPolicy: archive_index?'
+    # puts '--------------------------------------------------'
     true
   end
 
@@ -76,9 +76,9 @@ class ComponentPolicy < ApplicationPolicy
   end
 
   def archive_zip_and_download?
-    puts '--------------------------------------------------'
-    puts 'ComponentPolicy: archive_zip_and_download?'
-    puts '--------------------------------------------------'
+    # puts '--------------------------------------------------'
+    # puts 'ComponentPolicy: archive_zip_and_download?'
+    # puts '--------------------------------------------------'
 #    user_activities.include?('archivization:show') || (user_activities.include?('archivization:self_show') && owner_access) || user_in_group_activities.include?('archivization:show')
     archive_show?
   end
@@ -105,9 +105,9 @@ class ComponentPolicy < ApplicationPolicy
   end
 
   def archive_work?
-    puts '--------------------------------------------------'
-    puts 'ComponentPolicy: archive_work?'
-    puts '--------------------------------------------------'
+    # puts '--------------------------------------------------'
+    # puts 'ComponentPolicy: archive_work?'
+    # puts '--------------------------------------------------'
     true
   end
 

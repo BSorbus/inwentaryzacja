@@ -114,7 +114,7 @@ class ComponentDatatable < AjaxDatatablesRails::ActiveRecord
     else
       "<div style='text-align: center'>" +
         link_download(rec) +
-        link_show(rec) +
+        # link_show(rec) +
         link_edit(rec) +
         link_destroy(rec) +
       "</div>"
