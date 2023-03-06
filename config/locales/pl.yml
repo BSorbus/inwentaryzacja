@@ -26,7 +26,7 @@ pl:
       slide_2: '...aby zobaczyć cały świat'
     info:
       information_file_pdf: 'Instrukcja, oświadczenia (instrukcja.pdf)'
-      custom_file_zip: 'Inwentaryzacja szablony (szablony_csv.zip)'
+      custom_file_zip: 'Inwentaryzacja szablony (szablony.zip)'
     declaration:
       title: 'Deklaracja dostępności'
       navbar: 'Deklaracja dostępności'

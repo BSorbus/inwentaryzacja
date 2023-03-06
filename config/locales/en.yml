@@ -26,7 +26,7 @@ en:
       slide_2: '...to see the whole world.'
     info:
       information_file_pdf: 'Instrukcja, oświadczenia (instrukcja.pdf)'
-      custom_file_zip: 'Inwentaryzacja szablony (szablony_csv.zip)'
+      custom_file_zip: 'Inwentaryzacja szablony (szablony.zip)'
     declaration:
       title: 'Accessibility declaration'
       navbar: 'Accessibility declaration'
