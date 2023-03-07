@@ -40,21 +40,39 @@ class ComponentDatatable < AjaxDatatablesRails::ActiveRecord
 
   private
 
+  # def get_raw_records
+  #   if (options[:componentable_id]).present? && (options[:componentable_type]).present?
+  #     #data = Component.joins(:user).where(componentable_id: options[:componentable_id], componentable_type: options[:componentable_type]).order(:name_if_folder)
+  #     data = Component.joins(:author).where(componentable_id: options[:componentable_id], componentable_type: options[:componentable_type]).order('components.name_if_folder')
+  #   else
+  #     data = Component.joins(:author)
+  #   end
+
+  #   if options[:component_parent_filter].present? 
+  #     data.only_for_parent(options[:component_parent_filter]).with_ancestor 
+  #   else
+  #     data.with_ancestor.roots
+  #   end
+
+  # end
+
+
   def get_raw_records
     if (options[:componentable_id]).present? && (options[:componentable_type]).present?
       #data = Component.joins(:user).where(componentable_id: options[:componentable_id], componentable_type: options[:componentable_type]).order(:name_if_folder)
       data = Component.joins(:author).where(componentable_id: options[:componentable_id], componentable_type: options[:componentable_type]).order('components.name_if_folder')
-    else
-      data = Component.joins(:author)
-    end
 
-    if options[:component_parent_filter].present? 
-      data.only_for_parent(options[:component_parent_filter]).with_ancestor 
+      if options[:component_parent_filter].present? 
+        data.only_for_parent(options[:component_parent_filter]).with_ancestor 
+      else
+        data.with_ancestor.roots
+      end
     else
-      data.with_ancestor.roots
+      data = Component.joins(:author).where(componentable_id: nil, componentable_type: nil)
     end
 
   end
+
 
   def link_component_file_or_folder(rec)
     if rec.is_folder?

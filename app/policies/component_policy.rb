@@ -78,6 +78,12 @@ class ComponentPolicy < ApplicationPolicy
   def archive_zip_and_download?
     # puts '--------------------------------------------------'
     # puts 'ComponentPolicy: archive_zip_and_download?'
+    # puts @model.author.id
+    # puts @model.author.email
+    # puts 'user_activities:'
+    # puts user_activities 
+    # puts 'user_in_group_activities:'
+    # puts user_in_group_activities
     # puts '--------------------------------------------------'
 #    user_activities.include?('archivization:show') || (user_activities.include?('archivization:self_show') && owner_access) || user_in_group_activities.include?('archivization:show')
     archive_show?
