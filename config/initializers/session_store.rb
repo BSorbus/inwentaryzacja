@@ -8,5 +8,6 @@ Rails.application.config.session_store :redis_store, {
   ],
   expire_after: 60.minutes,
   key: Rails.application.secrets.cache_store_key,
-  same_site: :lax
+  same_site: :lax,
+  secure: true
 }
