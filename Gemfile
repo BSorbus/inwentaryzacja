@@ -97,6 +97,7 @@ gem 'carrierwave', '~> 2.0'
 gem 'mini_magick'
 gem 'jquery-fileupload-rails'
 gem 'file_validators'
+gem 'carrierwave-i18n'
 
 gem 'closure_tree'
 gem 'rubyzip'

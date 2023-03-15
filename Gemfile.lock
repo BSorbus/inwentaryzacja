@@ -80,6 +80,7 @@ GEM
       marcel (~> 1.0.0)
       mini_mime (>= 0.1.3)
       ssrf_filter (~> 1.0)
+    carrierwave-i18n (0.2.0)
     chronic (0.10.2)
     closure_tree (7.4.0)
       activerecord (>= 4.2.10)
@@ -330,6 +331,7 @@ DEPENDENCIES
   brakeman
   byebug
   carrierwave (~> 2.0)
+  carrierwave-i18n
   closure_tree
   devise (>= 4.7.1)
   devise_saml_authenticatable
