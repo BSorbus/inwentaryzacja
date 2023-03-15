@@ -72,34 +72,34 @@ class ComponentUploader < CarrierWave::Uploader::Base
 
   def override_content_type_and_save_info
 #    file.content_type = MIME::Types.type_for(original_filename).first.to_s
-    case File.extname(file.file).delete('.').downcase.to_sym
-    when :xlsx
+    case File.extname(file.file).delete('.').downcase.to_sym.to_s
+    when 'xlsx'
       file.content_type = 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
-    when :docx
+    when 'docx'
       file.content_type = 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'
-    when :pptx
+    when 'pptx'
       file.content_type = 'application/vnd.openxmlformats-officedocument.presentationml.presentation'
-    when :rar
+    when 'rar'
       file.content_type = 'application/vnd.rar'
-    when :zip
+    when 'zip'
       file.content_type = 'application/zip'
-    when :7z
+    when '7z'
       file.content_type = 'application/x-7z-compressed'
-    when :bat
+    when 'bat'
       file.content_type = 'application/x-msdos-program'
-    when :cmd
+    when 'cmd'
       file.content_type = 'application/cmd'
-    when :exe
+    when 'exe'
       file.content_type = 'application/x-msdownload'
-    when :msi
+    when 'msi'
       file.content_type = 'application/x-msi'
-    when :php
+    when 'php'
       file.content_type = 'application/x-php'
-    when :py
+    when 'py'
       file.content_type = 'application/x-python'
-    when :vbs
+    when 'vbs'
       file.content_type = 'application/x-vbs'
-    when :csv
+    when 'csv'
       file.content_type = 'text/csv'
     end
 

@@ -22,22 +22,24 @@ class Component < ApplicationRecord
                    length: { in: 1..100 },
                    uniqueness: { case_sensitive: false, scope: [:componentable_id, :componentable_type, :parent_id] }, allow_blank: true
 
-  validates :component_file, presence: true, 
-                    file_content_type: { exclude: [ 'application/x-msdos-program',
-                                                    'application/cmd',
-                                                    'application/x-ms-dos-executable',
-                                                    'application/x-msdownload',
-                                                    'application/x-javascript', 
-                                                    'application/x-msi',
-                                                    'application/x-php',
-                                                    'application/x-python',
-                                                    'application/x-vbs' ] },
-                    file_size: { in: 1.byte..2.gigabyte }, unless: -> { name_if_folder.present? }
-
   # validates :component_file, presence: true, 
+  #                   file_content_type: { exclude: [ 'application/x-msdos-program',
+  #                                                   'application/cmd',
+  #                                                   'application/x-ms-dos-executable',
+  #                                                   'application/x-msdownload',
+  #                                                   'application/x-javascript', 
+  #                                                   'application/x-msi',
+  #                                                   'application/x-php',
+  #                                                   'application/x-python',
+  #                                                   'application/x-vbs' ] },
   #                   file_size: { in: 1.byte..2.gigabyte }, unless: -> { name_if_folder.present? }
 
-  validate :check_quota, on: :create, unless: -> { name_if_folder.present? }
+  validates :component_file, presence: true, 
+                    file_size: { in: 1.byte..2.gigabyte }, unless: -> { name_if_folder.present? }
+
+
+  validate :validate_name_file_extension, on: :create, unless: -> { name_if_folder.present? }
+  validate :validate_check_quota, on: :create, unless: -> { name_if_folder.present? }
 
   # callbacks
   before_validation :set_name_corrected
@@ -164,7 +166,19 @@ class Component < ApplicationRecord
       end
     end 
 
-    def check_quota
+    def validate_name_file_extension
+      filename_ext = name.downcase.split('.').last if name.present?
+      puts "============================================================"
+      puts filename_ext
+      puts "============================================================"
+      unless (['7z', 'zip', 'rar', 'csv' ,'geojson', 'gml', 'xsd', 'gpkg', 'kml', 'shx', 'shp', 'prj', 'dbf', 'cpg']).include?(filename_ext)
+        allowed = ".7z .zip .rar .csv .geojson .gml .xsd .gpkg .kml .shx .shp .prj .dbf .cpg"
+        errors.add(:name, I18n.t('errors.messages.extension_whitelist_error', extension: "#{filename_ext}", allowed_types: "#{allowed}") ) 
+        throw :abort 
+      end if filename_ext.present?
+    end
+
+    def validate_check_quota
       sum_files_size = self.componentable.components.where.not(component_file: nil).map {|a| a.component_file.file.size }.sum
       current_file_size = component_file.file.size 
       archive_quota = self.componentable.quota
