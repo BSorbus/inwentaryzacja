@@ -22,16 +22,19 @@ class Component < ApplicationRecord
                    length: { in: 1..100 },
                    uniqueness: { case_sensitive: false, scope: [:componentable_id, :componentable_type, :parent_id] }, allow_blank: true
 
+  # validates :component_file, presence: true, 
+  #                   file_content_type: { exclude: [ 'application/x-msdos-program',
+  #                                                   'application/cmd',
+  #                                                   'application/x-ms-dos-executable',
+  #                                                   'application/x-msdownload',
+  #                                                   'application/x-javascript', 
+  #                                                   'application/x-msi',
+  #                                                   'application/x-php',
+  #                                                   'application/x-python',
+  #                                                   'application/x-vbs' ] },
+  #                   file_size: { in: 1.byte..2.gigabyte }, unless: -> { name_if_folder.present? }
+
   validates :component_file, presence: true, 
-                    file_content_type: { exclude: [ 'application/x-msdos-program',
-                                                    'application/cmd',
-                                                    'application/x-ms-dos-executable',
-                                                    'application/x-msdownload',
-                                                    'application/x-javascript', 
-                                                    'application/x-msi',
-                                                    'application/x-php',
-                                                    'application/x-python',
-                                                    'application/x-vbs' ] },
                     file_size: { in: 1.byte..2.gigabyte }, unless: -> { name_if_folder.present? }
 
   validate :check_quota, on: :create, unless: -> { name_if_folder.present? }
