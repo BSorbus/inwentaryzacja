@@ -58,6 +58,10 @@ class ComponentUploader < CarrierWave::Uploader::Base
    %w(zip z00 z01 z02 z03 z04 z05 z06 z07 z08 z09 rar r00 r01 r02 r03 r04 r05 r06 r07 r08 r09 7z csv csv geojason gml xsd gpkg kml shx shp prj dbf cpg)
   end
 
+  def extension_allowlist
+   %w(zip z00 z01 z02 z03 z04 z05 z06 z07 z08 z09 rar r00 r01 r02 r03 r04 r05 r06 r07 r08 r09 7z csv csv geojason gml xsd gpkg kml shx shp prj dbf cpg)
+  end
+
   # Override the filename of the uploaded files:
   # Avoid using model.id or version_name here, see uploader/store.rb for details.
   # def filename
