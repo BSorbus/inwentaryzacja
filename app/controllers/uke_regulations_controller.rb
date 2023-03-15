@@ -24,7 +24,7 @@ class UkeRegulationsController < ApplicationController
         redirect_to root_path
       end
     else
-      flash[:warning] = "development mode, UkeRegulations is OFF"
+      # 2023-03-15 flash[:warning] = "development mode, UkeRegulations is OFF"
       # flash[:warning] = "Odblokuj UkeRegulations"
       redirect_to root_path      
     end
