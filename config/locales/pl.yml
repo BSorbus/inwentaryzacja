@@ -27,6 +27,12 @@ pl:
     info:
       information_file_pdf: 'Instrukcja, oświadczenia (instrukcja.pdf)'
       custom_file_zip: 'Inwentaryzacja szablony (szablony.zip)'
+      baza_adresowa_rar: 'Baza Adresowa'
+      pit_tylko_uslugi_xlsx: 'Usługi Szablon'
+      pit_tylko_wifi_xlsx: 'WiFi Szablon'
+      pozwolenia_radiowe_xlsx: 'Pozwolenia radiowe'
+      projekt_startowy_qgis_zip: 'QGIS projekt startowy'
+      pytania_odpowiedzi_pdf: 'FAQ'
     declaration:
       title: 'Deklaracja dostępności'
       navbar: 'Deklaracja dostępności'
