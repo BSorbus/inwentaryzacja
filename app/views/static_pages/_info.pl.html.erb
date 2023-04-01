@@ -1,13 +1,17 @@
 <h4 class="text-justify">Szanowni Państwo,</h4>
-<h4 class="text-justify">Mając na uwadze postulaty zgłoszone przez Izby podczas spotkania w dniu 2 marca br. w trakcie, którego podniesiono obawy związane z niestabilnym działaniem systemu PIT, krótkim okresem na realizację obowiązku sprawozdawczości i brakiem posiadania danych w wymaganych formatach przez PT, a w konsekwencji obawami o karanie PT, UKE podjęło decyzję o udostępnieniu prostszego narzędzia - <strong>Inwentaryzacja UKE</strong> - pozwalającego na wykonanie obowiązku wynikającego z art. 29 ust.2a ustawy o wspieraniu rozwoju usług i sieci telekomunikacyjnych. Dostęp do tej aplikacji możliwy jest po uprzednim zalogowaniu się w Centralnym Systemie Uwierzytelniania UKE.</h4>
-<h4>Po otrzymaniu sprawozdania i analizie przekazanych danych, w przypadku pomyłek, UKE zwróci się do danego PT o weryfikację i ewentualną poprawę przekazanych danych zgodnie ze wcześniejszymi deklaracjami.</h4>
+<h4 class="text-justify">UKE udostępnił w ramach systemu PIT narzędzie - <%= link_to "Inwentaryzacja UKE", "https://inwentaryzacja.uke.gov.pl" %> - pozwalające na wykonanie obowiązku wynikającego zarówno z art. 29 ust.2a jak i 29c ustawy o wspieraniu rozwoju usług i sieci telekomunikacyjnych. Dostęp do tej aplikacji możliwy jest po uprzednim zalogowaniu się w Centralnym Systemie Uwierzytelniania UKE.</h4>
+
+<h4 class="text-justify">UKE rekomenduje przekazywanie danych zgodnych z szablonami, które przewidziane są <%= link_to t('.ordinance_url'), "https://legislacja.rcl.gov.pl/projekt/12366308" %> Po otrzymaniu sprawozdania i analizie przekazanych danych, w przypadku pomyłek, UKE zwróci się do danego podmiotu o weryfikację i ewentualną poprawę przekazanych danych. Podmioty, które przekażą prawidłowe dane zostaną o tym fakcie poinformowane.</h4>
+
 <h4 class="text-justify">Instrukcja wraz z oświadczeniami oraz szablony:</h4>
+
 <h4><%= link_to t('.information_file_pdf'), "http://#{Rails.application.secrets[:domain_name]}/downloadfile/instrukcja.pdf" %></h4>
 <h4><%= link_to t('.custom_file_zip'), "http://#{Rails.application.secrets[:domain_name]}/downloadfile/szablony.zip" %></h4>
-
 <h4><%= link_to t('.baza_adresowa_rar'), "http://#{Rails.application.secrets[:domain_name]}/downloadfile/baza_adresowa.rar" %></h4>
 <h4><%= link_to t('.pit_tylko_uslugi_xlsx'), "http://#{Rails.application.secrets[:domain_name]}/downloadfile/pit_tylko_uslugi.xlsx" %></h4>
 <h4><%= link_to t('.pit_tylko_wifi_xlsx'), "http://#{Rails.application.secrets[:domain_name]}/downloadfile/pit_tylko_wifi.xlsx" %></h4>
 <h4><%= link_to t('.pozwolenia_radiowe_xlsx'), "http://#{Rails.application.secrets[:domain_name]}/downloadfile/pozwolenia_radiowe.xlsx" %></h4>
+<h4><%= link_to t('.infrastruktura_pasywna_zip'), "http://#{Rails.application.secrets[:domain_name]}/downloadfile/infrastruktura_pasywna_szablony_csv.zip" %></h4>
 <h4><%= link_to t('.projekt_startowy_qgis_zip'), "http://#{Rails.application.secrets[:domain_name]}/downloadfile/projekt_startowy_qgis.zip" %></h4>
 <h4><%= link_to t('.pytania_odpowiedzi_pdf'), "http://#{Rails.application.secrets[:domain_name]}/downloadfile/pytania_odpowiedzi.pdf" %></h4>
+
