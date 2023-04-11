@@ -2,6 +2,7 @@ class ArchivizationType < ApplicationRecord
 
   # relations
   has_many :archivizations, dependent: :nullify
+  has_many :archives, through: :archivizations
 
   # validates
   validates :name, presence: true,
