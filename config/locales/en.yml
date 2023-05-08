@@ -35,6 +35,8 @@ en:
       infrastruktura_pasywna_zip: 'Infrastruktura Pasywna Szablony'
       projekt_startowy_qgis_zip: 'QGIS projekt startowy'
       pytania_odpowiedzi_pdf: 'FAQ'
+      stawki_za_pas_drogowy_nowe_przepisy_xlsx: 'Stawki za zajęcie pasa drogowego – nowe przepisy'
+      stawki_za_pas_drogowy_stare_przepisy_xlsx: 'Stawki za zajęcie pasa drogowego – stare przepisy'
     declaration:
       title: 'Accessibility declaration'
       navbar: 'Accessibility declaration'
