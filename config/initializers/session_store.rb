@@ -7,5 +7,6 @@ Rails.application.config.session_store :redis_store, {
     { host: Rails.application.secrets.redis_host, port: 6379, db: 0 },
   ],
   expire_after: 60.minutes,
-  key: Rails.application.secrets.cache_store_key
+  key: Rails.application.secrets.cache_store_key,
+  same_site: :lax
 }
