@@ -7,10 +7,10 @@ ruby '2.7.6'
 gem 'rails', '~> 5.2.8.1'
 # Use sqlite3 as the database for Active Record
 #gem 'sqlite3'
-gem 'pg'
+gem 'pg', '>= 1.5.4'
 # Use Puma as the app server
-gem 'puma', '~> 5.6.2'
-gem 'nokogiri', '~> 1.13.9'
+gem 'puma', '>= 6.4.0'
+gem 'nokogiri', '>= 1.15.4'
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0'
 # Use Uglifier as compressor for JavaScript assets
@@ -106,3 +106,4 @@ gem 'rubyzip'
 gem "rack", ">= 2.2.3"
 gem "websocket-extensions", ">= 0.1.5"
 gem "addressable", ">= 2.8.1"
+gem "mail", "= 2.7.1"
