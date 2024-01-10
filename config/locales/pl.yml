@@ -37,6 +37,7 @@ pl:
       pytania_odpowiedzi_pdf: 'FAQ'
       stawki_za_pas_drogowy_nowe_przepisy_xlsx: 'Stawki za zajęcie pasa drogowego – nowe przepisy'
       stawki_za_pas_drogowy_stare_przepisy_xlsx: 'Stawki za zajęcie pasa drogowego – stare przepisy'
+      szablony_zip: 'Szablony.zip'
     declaration:
       title: 'Deklaracja dostępności'
       navbar: 'Deklaracja dostępności'
