@@ -7,7 +7,7 @@ ruby '2.7.6'
 gem 'rails', '~> 5.2.8.1'
 # Use sqlite3 as the database for Active Record
 #gem 'sqlite3'
-gem 'pg', '>= 1.5.4'
+gem 'pg', '>= 1.6.2'
 # Use Puma as the app server
 gem 'puma', '>= 6.4.0'
 gem 'nokogiri', '>= 1.15.4'

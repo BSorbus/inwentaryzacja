@@ -178,7 +178,7 @@ GEM
       racc (~> 1.4)
     open4 (1.3.4)
     orm_adapter (0.5.0)
-    pg (1.5.4)
+    pg (1.6.2)
     piwik_analytics (1.0.2)
       actionpack
       activesupport
@@ -351,7 +351,7 @@ DEPENDENCIES
   mini_magick
   momentjs-rails
   nokogiri (>= 1.15.4)
-  pg (>= 1.5.4)
+  pg (>= 1.6.2)
   piwik_analytics
   premailer-rails
   puma (>= 6.4.0)
